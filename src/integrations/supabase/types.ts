@@ -152,6 +152,13 @@ export type Database = {
             referencedColumns: ["id_agence"]
           },
           {
+            foreignKeyName: "commission_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
             foreignKeyName: "commission_id_livret_fkey"
             columns: ["id_livret"]
             isOneToOne: false
@@ -159,10 +166,31 @@ export type Database = {
             referencedColumns: ["id_livret"]
           },
           {
+            foreignKeyName: "commission_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
+            referencedColumns: ["id_livret"]
+          },
+          {
+            foreignKeyName: "commission_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_solde_livret"
+            referencedColumns: ["id_livret"]
+          },
+          {
             foreignKeyName: "commission_id_operation_origine_fkey"
             columns: ["id_operation_origine"]
             isOneToOne: false
             referencedRelation: "operation"
+            referencedColumns: ["id_operation"]
+          },
+          {
+            foreignKeyName: "commission_id_operation_origine_fkey"
+            columns: ["id_operation_origine"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
             referencedColumns: ["id_operation"]
           },
           {
@@ -213,6 +241,13 @@ export type Database = {
             columns: ["id_operation"]
             isOneToOne: false
             referencedRelation: "operation"
+            referencedColumns: ["id_operation"]
+          },
+          {
+            foreignKeyName: "detail_remise_id_operation_fkey"
+            columns: ["id_operation"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
             referencedColumns: ["id_operation"]
           },
           {
@@ -275,6 +310,13 @@ export type Database = {
             referencedRelation: "agence"
             referencedColumns: ["id_agence"]
           },
+          {
+            foreignKeyName: "epargnant_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
         ]
       }
       livret: {
@@ -329,6 +371,13 @@ export type Database = {
             referencedColumns: ["id_agence"]
           },
           {
+            foreignKeyName: "livret_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
             foreignKeyName: "livret_id_collectrice_fkey"
             columns: ["id_collectrice"]
             isOneToOne: false
@@ -340,6 +389,13 @@ export type Database = {
             columns: ["id_epargnant"]
             isOneToOne: false
             referencedRelation: "epargnant"
+            referencedColumns: ["id_epargnant"]
+          },
+          {
+            foreignKeyName: "livret_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
             referencedColumns: ["id_epargnant"]
           },
         ]
@@ -387,10 +443,31 @@ export type Database = {
             referencedColumns: ["id_agence"]
           },
           {
+            foreignKeyName: "mouvement_livret_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
             foreignKeyName: "mouvement_livret_id_livret_fkey"
             columns: ["id_livret"]
             isOneToOne: false
             referencedRelation: "livret"
+            referencedColumns: ["id_livret"]
+          },
+          {
+            foreignKeyName: "mouvement_livret_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
+            referencedColumns: ["id_livret"]
+          },
+          {
+            foreignKeyName: "mouvement_livret_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_solde_livret"
             referencedColumns: ["id_livret"]
           },
           {
@@ -479,10 +556,24 @@ export type Database = {
             referencedColumns: ["id_agence"]
           },
           {
+            foreignKeyName: "operation_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
             foreignKeyName: "operation_id_epargnant_fkey"
             columns: ["id_epargnant"]
             isOneToOne: false
             referencedRelation: "epargnant"
+            referencedColumns: ["id_epargnant"]
+          },
+          {
+            foreignKeyName: "operation_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
             referencedColumns: ["id_epargnant"]
           },
           {
@@ -493,10 +584,31 @@ export type Database = {
             referencedColumns: ["id_livret"]
           },
           {
+            foreignKeyName: "operation_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
+            referencedColumns: ["id_livret"]
+          },
+          {
+            foreignKeyName: "operation_id_livret_fkey"
+            columns: ["id_livret"]
+            isOneToOne: false
+            referencedRelation: "v_solde_livret"
+            referencedColumns: ["id_livret"]
+          },
+          {
             foreignKeyName: "operation_id_operation_origine_fkey"
             columns: ["id_operation_origine"]
             isOneToOne: false
             referencedRelation: "operation"
+            referencedColumns: ["id_operation"]
+          },
+          {
+            foreignKeyName: "operation_id_operation_origine_fkey"
+            columns: ["id_operation_origine"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
             referencedColumns: ["id_operation"]
           },
           {
@@ -689,6 +801,13 @@ export type Database = {
             referencedColumns: ["id_agence"]
           },
           {
+            foreignKeyName: "remise_caisse_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
             foreignKeyName: "remise_caisse_id_caissier_fkey"
             columns: ["id_caissier"]
             isOneToOne: false
@@ -800,6 +919,13 @@ export type Database = {
             referencedRelation: "agence"
             referencedColumns: ["id_agence"]
           },
+          {
+            foreignKeyName: "utilisateur_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
         ]
       }
       utilisateur_role: {
@@ -837,14 +963,189 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      v_situation_individuelle: {
+        Row: {
+          code_type: string | null
+          date_operation: string | null
+          id_agence: string | null
+          id_epargnant: string | null
+          id_livret: string | null
+          id_operation: string | null
+          libelle_type: string | null
+          montant_credit: number | null
+          montant_debit: number | null
+          nom: string | null
+          numero_client: string | null
+          numero_livret: string | null
+          prenom: string | null
+          reference: string | null
+          solde_progressif: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operation_code_type_fkey"
+            columns: ["code_type"]
+            isOneToOne: false
+            referencedRelation: "type_operation"
+            referencedColumns: ["code_type"]
+          },
+          {
+            foreignKeyName: "operation_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "operation_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+        ]
+      }
+      v_solde_livret: {
+        Row: {
+          derniere_operation: string | null
+          id_agence: string | null
+          id_epargnant: string | null
+          id_livret: string | null
+          numero_livret: string | null
+          solde: number | null
+          total_credit: number | null
+          total_debit: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "livret_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "livret_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "livret_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "epargnant"
+            referencedColumns: ["id_epargnant"]
+          },
+          {
+            foreignKeyName: "livret_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
+            referencedColumns: ["id_epargnant"]
+          },
+        ]
+      }
+      v_stock_agence: {
+        Row: {
+          actif: number | null
+          attribue: number | null
+          bloque: number | null
+          cloture: number | null
+          code: string | null
+          disponible: number | null
+          id_agence: string | null
+          nom: string | null
+          perdu: number | null
+          total_recu: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       a_role: { Args: { _code: string }; Returns: boolean }
       acces_agence: { Args: { _id_agence: string }; Returns: boolean }
       agence_courante: { Args: never; Returns: string }
+      annuler_operation: {
+        Args: { _id_operation: string; _motif: string }
+        Returns: string
+      }
+      calculer_commission: {
+        Args: { _base: number; _code_type: string; _date: string }
+        Returns: {
+          id_regle: string
+          montant: number
+        }[]
+      }
+      changer_statut_livret: {
+        Args: { _id_livret: string; _motif?: string; _statut: string }
+        Returns: string
+      }
+      controler_remise: {
+        Args: {
+          _id_remise: string
+          _montant_controle: number
+          _valider?: boolean
+        }
+        Returns: string
+      }
+      creer_remise: {
+        Args: { _commentaire?: string; _date: string; _montant_declare: number }
+        Returns: string
+      }
+      enregistrer_collecte: {
+        Args: {
+          _commentaire?: string
+          _date?: string
+          _id_livret: string
+          _montant: number
+        }
+        Returns: string
+      }
+      enregistrer_commission: {
+        Args: {
+          _base: number
+          _code_type: string
+          _date: string
+          _id_agence: string
+          _id_livret: string
+          _id_operation: string
+          _id_utilisateur: string
+        }
+        Returns: string
+      }
+      enregistrer_retrait: {
+        Args: {
+          _commentaire?: string
+          _date?: string
+          _id_livret: string
+          _montant: number
+        }
+        Returns: string
+      }
+      enregistrer_vente: {
+        Args: {
+          _commentaire?: string
+          _date?: string
+          _id_epargnant: string
+          _id_livret: string
+          _montant: number
+        }
+        Returns: string
+      }
       est_admin: { Args: never; Returns: boolean }
+      generer_reference: {
+        Args: { _prefixe: string; _seq: unknown }
+        Returns: string
+      }
+      prochain_numero_client: { Args: never; Returns: string }
+      receptionner_livrets: {
+        Args: { _id_agence: string; _numeros: string[] }
+        Returns: number
+      }
       utilisateur_courant: { Args: never; Returns: string }
+      valider_operation: { Args: { _id_operation: string }; Returns: string }
       voit_tout: { Args: never; Returns: boolean }
     }
     Enums: {
