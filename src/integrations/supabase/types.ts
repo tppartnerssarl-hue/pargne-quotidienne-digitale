@@ -20,6 +20,7 @@ export type Database = {
           code: string
           created_at: string
           date_creation: string
+          est_demo: boolean
           id_agence: string
           nom: string
           statut: string
@@ -31,6 +32,7 @@ export type Database = {
           code: string
           created_at?: string
           date_creation?: string
+          est_demo?: boolean
           id_agence?: string
           nom: string
           statut?: string
@@ -42,6 +44,7 @@ export type Database = {
           code?: string
           created_at?: string
           date_creation?: string
+          est_demo?: boolean
           id_agence?: string
           nom?: string
           statut?: string
@@ -264,6 +267,7 @@ export type Database = {
           adresse: string | null
           created_at: string
           date_creation: string
+          est_demo: boolean
           id_agence: string
           id_epargnant: string
           nom: string
@@ -278,6 +282,7 @@ export type Database = {
           adresse?: string | null
           created_at?: string
           date_creation?: string
+          est_demo?: boolean
           id_agence: string
           id_epargnant?: string
           nom: string
@@ -292,6 +297,7 @@ export type Database = {
           adresse?: string | null
           created_at?: string
           date_creation?: string
+          est_demo?: boolean
           id_agence?: string
           id_epargnant?: string
           nom?: string
@@ -874,6 +880,7 @@ export type Database = {
           created_at: string
           date_creation: string
           email: string
+          est_demo: boolean
           id_agence: string | null
           id_utilisateur: string
           login: string | null
@@ -888,6 +895,7 @@ export type Database = {
           created_at?: string
           date_creation?: string
           email: string
+          est_demo?: boolean
           id_agence?: string | null
           id_utilisateur?: string
           login?: string | null
@@ -902,6 +910,7 @@ export type Database = {
           created_at?: string
           date_creation?: string
           email?: string
+          est_demo?: boolean
           id_agence?: string | null
           id_utilisateur?: string
           login?: string | null
