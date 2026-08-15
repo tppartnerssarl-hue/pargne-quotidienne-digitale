@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
@@ -30,6 +31,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCaisseRoute = AuthenticatedCaisseRouteImport.update({
+  id: '/caisse',
+  path: '/caisse',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCollecteRoute = AuthenticatedCollecteRouteImport.update({
   id: '/collecte',
@@ -56,6 +62,7 @@ const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
@@ -82,14 +91,28 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/collecte' | '/retraits' | '/tableau-de-bord' | '/vente'
+    | '/'
+    | '/auth'
+    | '/caisse'
+    | '/collecte'
+    | '/retraits'
+    | '/tableau-de-bord'
+    | '/vente'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/collecte' | '/retraits' | '/tableau-de-bord' | '/vente'
+  to:
+    | '/'
+    | '/auth'
+    | '/caisse'
+    | '/collecte'
+    | '/retraits'
+    | '/tableau-de-bord'
+    | '/vente'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/caisse'
     | '/_authenticated/collecte'
     | '/_authenticated/retraits'
     | '/_authenticated/tableau-de-bord'
@@ -125,6 +148,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/caisse': {
+      id: '/_authenticated/caisse'
+      path: '/caisse'
+      fullPath: '/caisse'
+      preLoaderRoute: typeof AuthenticatedCaisseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/collecte': {
       id: '/_authenticated/collecte'
       path: '/collecte'
@@ -157,6 +187,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
@@ -164,6 +195,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
