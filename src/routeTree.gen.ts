@@ -10,33 +10,132 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
+import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
+import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
+import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
+import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
+import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCaisseRoute = AuthenticatedCaisseRouteImport.update({
+  id: '/caisse',
+  path: '/caisse',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCollecteRoute = AuthenticatedCollecteRouteImport.update({
+  id: '/collecte',
+  path: '/collecte',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRetraitsRoute = AuthenticatedRetraitsRouteImport.update({
+  id: '/retraits',
+  path: '/retraits',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTableauDeBordRoute =
+  AuthenticatedTableauDeBordRouteImport.update({
+    id: '/tableau-de-bord',
+    path: '/tableau-de-bord',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
+  id: '/vente',
+  path: '/vente',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEpargnantsIndexRoute =
+  AuthenticatedEpargnantsIndexRouteImport.update({
+    id: '/epargnants/',
+    path: '/epargnants/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/caisse': typeof AuthenticatedCaisseRoute
+  '/collecte': typeof AuthenticatedCollecteRoute
+  '/retraits': typeof AuthenticatedRetraitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/caisse': typeof AuthenticatedCaisseRoute
+  '/collecte': typeof AuthenticatedCollecteRoute
+  '/retraits': typeof AuthenticatedRetraitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
+  '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
+  '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
+  '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/_authenticated/vente': typeof AuthenticatedVenteRoute
+  '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/caisse'
+    | '/collecte'
+    | '/retraits'
+    | '/tableau-de-bord'
+    | '/vente'
+    | '/epargnants/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/caisse'
+    | '/collecte'
+    | '/retraits'
+    | '/tableau-de-bord'
+    | '/vente'
+    | '/epargnants'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/caisse'
+    | '/_authenticated/collecte'
+    | '/_authenticated/retraits'
+    | '/_authenticated/tableau-de-bord'
+    | '/_authenticated/vente'
+    | '/_authenticated/epargnants/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +147,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/caisse': {
+      id: '/_authenticated/caisse'
+      path: '/caisse'
+      fullPath: '/caisse'
+      preLoaderRoute: typeof AuthenticatedCaisseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/collecte': {
+      id: '/_authenticated/collecte'
+      path: '/collecte'
+      fullPath: '/collecte'
+      preLoaderRoute: typeof AuthenticatedCollecteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/retraits': {
+      id: '/_authenticated/retraits'
+      path: '/retraits'
+      fullPath: '/retraits'
+      preLoaderRoute: typeof AuthenticatedRetraitsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tableau-de-bord': {
+      id: '/_authenticated/tableau-de-bord'
+      path: '/tableau-de-bord'
+      fullPath: '/tableau-de-bord'
+      preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vente': {
+      id: '/_authenticated/vente'
+      path: '/vente'
+      fullPath: '/vente'
+      preLoaderRoute: typeof AuthenticatedVenteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/epargnants/': {
+      id: '/_authenticated/epargnants/'
+      path: '/epargnants'
+      fullPath: '/epargnants/'
+      preLoaderRoute: typeof AuthenticatedEpargnantsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
+  AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
+  AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
+  AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
+  AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
+  AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
+  AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
+  AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
+  AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
+  AuthenticatedVenteRoute: AuthenticatedVenteRoute,
+  AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
