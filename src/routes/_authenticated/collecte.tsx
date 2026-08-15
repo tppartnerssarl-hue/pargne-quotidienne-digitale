@@ -128,7 +128,7 @@ function PageCollecte() {
         _id_livret: livret!.id_livret,
         _montant: Number(montant),
         _date: date,
-        _commentaire: undefined,
+        });
       });
       if (error) throw error;
       return data;
