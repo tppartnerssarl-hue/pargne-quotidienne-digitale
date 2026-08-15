@@ -17,6 +17,7 @@ import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
+import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,12 @@ const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
   path: '/vente',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEpargnantsIndexRoute =
+  AuthenticatedEpargnantsIndexRouteImport.update({
+    id: '/epargnants/',
+    path: '/epargnants/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,6 +84,7 @@ export interface FileRoutesByTo {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,6 +96,7 @@ export interface FileRoutesById {
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
+  '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
+    | '/epargnants/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
+    | '/epargnants'
   id:
     | '__root__'
     | '/'
@@ -117,6 +129,7 @@ export interface FileRouteTypes {
     | '/_authenticated/retraits'
     | '/_authenticated/tableau-de-bord'
     | '/_authenticated/vente'
+    | '/_authenticated/epargnants/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -183,6 +196,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVenteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/epargnants/': {
+      id: '/_authenticated/epargnants/'
+      path: '/epargnants'
+      fullPath: '/epargnants/'
+      preLoaderRoute: typeof AuthenticatedEpargnantsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -192,6 +212,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
+  AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -200,6 +221,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
+  AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
