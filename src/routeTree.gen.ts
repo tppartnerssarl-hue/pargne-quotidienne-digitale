@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
+import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,18 +41,25 @@ const AuthenticatedTableauDeBordRoute =
     path: '/tableau-de-bord',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
+  id: '/vente',
+  path: '/vente',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/vente': typeof AuthenticatedVenteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/vente': typeof AuthenticatedVenteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -60,12 +68,13 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/_authenticated/vente': typeof AuthenticatedVenteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/collecte' | '/tableau-de-bord'
+  fullPaths: '/' | '/auth' | '/collecte' | '/tableau-de-bord' | '/vente'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/collecte' | '/tableau-de-bord'
+  to: '/' | '/auth' | '/collecte' | '/tableau-de-bord' | '/vente'
   id:
     | '__root__'
     | '/'
@@ -73,6 +82,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/collecte'
     | '/_authenticated/tableau-de-bord'
+    | '/_authenticated/vente'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,17 +128,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vente': {
+      id: '/_authenticated/vente'
+      path: '/vente'
+      fullPath: '/vente'
+      preLoaderRoute: typeof AuthenticatedVenteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
+  AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
+  AuthenticatedVenteRoute: AuthenticatedVenteRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
