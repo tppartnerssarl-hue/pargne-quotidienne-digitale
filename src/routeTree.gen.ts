@@ -12,12 +12,23 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAgencesRouteImport } from './routes/_authenticated/agences'
+import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/audit'
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
+import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
+import { Route as AuthenticatedParametresRouteImport } from './routes/_authenticated/parametres'
+import { Route as AuthenticatedRapportsRouteImport } from './routes/_authenticated/rapports'
+import { Route as AuthenticatedRechercheRouteImport } from './routes/_authenticated/recherche'
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
+import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
+import { Route as AuthenticatedUtilisateursRouteImport } from './routes/_authenticated/utilisateurs'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
+import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
+import { Route as AuthenticatedLivretsIndexRouteImport } from './routes/_authenticated/livrets.index'
+import { Route as AuthenticatedLivretsIdRouteImport } from './routes/_authenticated/livrets.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,6 +44,16 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgencesRoute = AuthenticatedAgencesRouteImport.update({
+  id: '/agences',
+  path: '/agences',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAuditRoute = AuthenticatedAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCaisseRoute = AuthenticatedCaisseRouteImport.update({
   id: '/caisse',
   path: '/caisse',
@@ -43,15 +64,47 @@ const AuthenticatedCollecteRoute = AuthenticatedCollecteRouteImport.update({
   path: '/collecte',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCommissionsRoute =
+  AuthenticatedCommissionsRouteImport.update({
+    id: '/commissions',
+    path: '/commissions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedParametresRoute = AuthenticatedParametresRouteImport.update({
+  id: '/parametres',
+  path: '/parametres',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRapportsRoute = AuthenticatedRapportsRouteImport.update({
+  id: '/rapports',
+  path: '/rapports',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRechercheRoute = AuthenticatedRechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRetraitsRoute = AuthenticatedRetraitsRouteImport.update({
   id: '/retraits',
   path: '/retraits',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTableauDeBordRoute =
   AuthenticatedTableauDeBordRouteImport.update({
     id: '/tableau-de-bord',
     path: '/tableau-de-bord',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUtilisateursRoute =
+  AuthenticatedUtilisateursRouteImport.update({
+    id: '/utilisateurs',
+    path: '/utilisateurs',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
@@ -65,71 +118,154 @@ const AuthenticatedEpargnantsIndexRoute =
     path: '/epargnants/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedEpargnantsIdRoute =
+  AuthenticatedEpargnantsIdRouteImport.update({
+    id: '/epargnants/$id',
+    path: '/epargnants/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLivretsIndexRoute =
+  AuthenticatedLivretsIndexRouteImport.update({
+    id: '/livrets/',
+    path: '/livrets/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLivretsIdRoute = AuthenticatedLivretsIdRouteImport.update({
+  id: '/livrets/$id',
+  path: '/livrets/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agences': typeof AuthenticatedAgencesRoute
+  '/audit': typeof AuthenticatedAuditRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/commissions': typeof AuthenticatedCommissionsRoute
+  '/parametres': typeof AuthenticatedParametresRoute
+  '/rapports': typeof AuthenticatedRapportsRoute
+  '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
+  '/stock': typeof AuthenticatedStockRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
+  '/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agences': typeof AuthenticatedAgencesRoute
+  '/audit': typeof AuthenticatedAuditRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/commissions': typeof AuthenticatedCommissionsRoute
+  '/parametres': typeof AuthenticatedParametresRoute
+  '/rapports': typeof AuthenticatedRapportsRoute
+  '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
+  '/stock': typeof AuthenticatedStockRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
+  '/livrets': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/agences': typeof AuthenticatedAgencesRoute
+  '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
+  '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
+  '/_authenticated/parametres': typeof AuthenticatedParametresRoute
+  '/_authenticated/rapports': typeof AuthenticatedRapportsRoute
+  '/_authenticated/recherche': typeof AuthenticatedRechercheRoute
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
+  '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/_authenticated/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
+  '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/_authenticated/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
+  '/_authenticated/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
+    | '/agences'
+    | '/audit'
     | '/caisse'
     | '/collecte'
+    | '/commissions'
+    | '/parametres'
+    | '/rapports'
+    | '/recherche'
     | '/retraits'
+    | '/stock'
     | '/tableau-de-bord'
+    | '/utilisateurs'
     | '/vente'
+    | '/epargnants/$id'
+    | '/livrets/$id'
     | '/epargnants/'
+    | '/livrets/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/agences'
+    | '/audit'
     | '/caisse'
     | '/collecte'
+    | '/commissions'
+    | '/parametres'
+    | '/rapports'
+    | '/recherche'
     | '/retraits'
+    | '/stock'
     | '/tableau-de-bord'
+    | '/utilisateurs'
     | '/vente'
+    | '/epargnants/$id'
+    | '/livrets/$id'
     | '/epargnants'
+    | '/livrets'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/agences'
+    | '/_authenticated/audit'
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
+    | '/_authenticated/commissions'
+    | '/_authenticated/parametres'
+    | '/_authenticated/rapports'
+    | '/_authenticated/recherche'
     | '/_authenticated/retraits'
+    | '/_authenticated/stock'
     | '/_authenticated/tableau-de-bord'
+    | '/_authenticated/utilisateurs'
     | '/_authenticated/vente'
+    | '/_authenticated/epargnants/$id'
+    | '/_authenticated/livrets/$id'
     | '/_authenticated/epargnants/'
+    | '/_authenticated/livrets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -161,6 +297,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agences': {
+      id: '/_authenticated/agences'
+      path: '/agences'
+      fullPath: '/agences'
+      preLoaderRoute: typeof AuthenticatedAgencesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/audit': {
+      id: '/_authenticated/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthenticatedAuditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/caisse': {
       id: '/_authenticated/caisse'
       path: '/caisse'
@@ -175,6 +325,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCollecteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/commissions': {
+      id: '/_authenticated/commissions'
+      path: '/commissions'
+      fullPath: '/commissions'
+      preLoaderRoute: typeof AuthenticatedCommissionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/parametres': {
+      id: '/_authenticated/parametres'
+      path: '/parametres'
+      fullPath: '/parametres'
+      preLoaderRoute: typeof AuthenticatedParametresRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/rapports': {
+      id: '/_authenticated/rapports'
+      path: '/rapports'
+      fullPath: '/rapports'
+      preLoaderRoute: typeof AuthenticatedRapportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/recherche': {
+      id: '/_authenticated/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof AuthenticatedRechercheRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/retraits': {
       id: '/_authenticated/retraits'
       path: '/retraits'
@@ -182,11 +360,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRetraitsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/stock': {
+      id: '/_authenticated/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof AuthenticatedStockRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tableau-de-bord': {
       id: '/_authenticated/tableau-de-bord'
       path: '/tableau-de-bord'
       fullPath: '/tableau-de-bord'
       preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/utilisateurs': {
+      id: '/_authenticated/utilisateurs'
+      path: '/utilisateurs'
+      fullPath: '/utilisateurs'
+      preLoaderRoute: typeof AuthenticatedUtilisateursRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/vente': {
@@ -203,25 +395,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEpargnantsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/epargnants/$id': {
+      id: '/_authenticated/epargnants/$id'
+      path: '/epargnants/$id'
+      fullPath: '/epargnants/$id'
+      preLoaderRoute: typeof AuthenticatedEpargnantsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/livrets/': {
+      id: '/_authenticated/livrets/'
+      path: '/livrets'
+      fullPath: '/livrets/'
+      preLoaderRoute: typeof AuthenticatedLivretsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/livrets/$id': {
+      id: '/_authenticated/livrets/$id'
+      path: '/livrets/$id'
+      fullPath: '/livrets/$id'
+      preLoaderRoute: typeof AuthenticatedLivretsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgencesRoute: typeof AuthenticatedAgencesRoute
+  AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
+  AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
+  AuthenticatedParametresRoute: typeof AuthenticatedParametresRoute
+  AuthenticatedRapportsRoute: typeof AuthenticatedRapportsRoute
+  AuthenticatedRechercheRoute: typeof AuthenticatedRechercheRoute
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
+  AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
+  AuthenticatedUtilisateursRoute: typeof AuthenticatedUtilisateursRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
+  AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
+  AuthenticatedLivretsIdRoute: typeof AuthenticatedLivretsIdRoute
   AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
+  AuthenticatedLivretsIndexRoute: typeof AuthenticatedLivretsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgencesRoute: AuthenticatedAgencesRoute,
+  AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
+  AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
+  AuthenticatedParametresRoute: AuthenticatedParametresRoute,
+  AuthenticatedRapportsRoute: AuthenticatedRapportsRoute,
+  AuthenticatedRechercheRoute: AuthenticatedRechercheRoute,
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
+  AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
+  AuthenticatedUtilisateursRoute: AuthenticatedUtilisateursRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
+  AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
+  AuthenticatedLivretsIdRoute: AuthenticatedLivretsIdRoute,
   AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
+  AuthenticatedLivretsIndexRoute: AuthenticatedLivretsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
