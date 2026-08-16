@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Download } from "lucide-react";
+import { Download, HandCoins, Banknote, Scale } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,6 @@ import { EtatChargement, EtatErreur, EtatVide } from "@/components/commun/Etats"
 import { useConfiguration } from "@/hooks/useConfiguration";
 import { formaterMontant, formaterDate, debutDuMois, aujourdhui } from "@/lib/format";
 import { LIBELLE_TYPE_OPERATION, TYPES_CREDIT } from "@/lib/constantes";
-import { HandCoins, Banknote, Scale } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/rapports")({
   head: () => ({
