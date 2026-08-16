@@ -19,6 +19,7 @@ import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authen
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
+import { Route as AuthenticatedLivretsIndexRouteImport } from './routes/_authenticated/livrets.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -72,6 +73,12 @@ const AuthenticatedEpargnantsIdRoute =
     path: '/epargnants/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLivretsIndexRoute =
+  AuthenticatedLivretsIndexRouteImport.update({
+    id: '/livrets/',
+    path: '/livrets/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
+  '/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
+  '/livrets': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +116,7 @@ export interface FileRoutesById {
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
   '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
+  '/_authenticated/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/vente'
     | '/epargnants/$id'
     | '/epargnants/'
+    | '/livrets/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/vente'
     | '/epargnants/$id'
     | '/epargnants'
+    | '/livrets'
   id:
     | '__root__'
     | '/'
@@ -143,6 +155,7 @@ export interface FileRouteTypes {
     | '/_authenticated/vente'
     | '/_authenticated/epargnants/$id'
     | '/_authenticated/epargnants/'
+    | '/_authenticated/livrets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -223,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEpargnantsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/livrets/': {
+      id: '/_authenticated/livrets/'
+      path: '/livrets'
+      fullPath: '/livrets/'
+      preLoaderRoute: typeof AuthenticatedLivretsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -234,6 +254,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
   AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
   AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
+  AuthenticatedLivretsIndexRoute: typeof AuthenticatedLivretsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -244,6 +265,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
   AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
   AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
+  AuthenticatedLivretsIndexRoute: AuthenticatedLivretsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
