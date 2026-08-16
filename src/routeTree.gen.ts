@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
+import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
 import { Route as AuthenticatedRechercheRouteImport } from './routes/_authenticated/recherche'
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
@@ -48,6 +49,12 @@ const AuthenticatedCollecteRoute = AuthenticatedCollecteRouteImport.update({
   path: '/collecte',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCommissionsRoute =
+  AuthenticatedCommissionsRouteImport.update({
+    id: '/commissions',
+    path: '/commissions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedRechercheRoute = AuthenticatedRechercheRouteImport.update({
   id: '/recherche',
   path: '/recherche',
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/commissions': typeof AuthenticatedCommissionsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/stock': typeof AuthenticatedStockRoute
@@ -118,6 +126,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/commissions': typeof AuthenticatedCommissionsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/stock': typeof AuthenticatedStockRoute
@@ -135,6 +144,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
+  '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
   '/_authenticated/recherche': typeof AuthenticatedRechercheRoute
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/caisse'
     | '/collecte'
+    | '/commissions'
     | '/recherche'
     | '/retraits'
     | '/stock'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/caisse'
     | '/collecte'
+    | '/commissions'
     | '/recherche'
     | '/retraits'
     | '/stock'
@@ -183,6 +195,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
+    | '/_authenticated/commissions'
     | '/_authenticated/recherche'
     | '/_authenticated/retraits'
     | '/_authenticated/stock'
@@ -235,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/collecte'
       fullPath: '/collecte'
       preLoaderRoute: typeof AuthenticatedCollecteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/commissions': {
+      id: '/_authenticated/commissions'
+      path: '/commissions'
+      fullPath: '/commissions'
+      preLoaderRoute: typeof AuthenticatedCommissionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/recherche': {
@@ -306,6 +326,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
+  AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
   AuthenticatedRechercheRoute: typeof AuthenticatedRechercheRoute
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
@@ -320,6 +341,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
+  AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
   AuthenticatedRechercheRoute: AuthenticatedRechercheRoute,
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
