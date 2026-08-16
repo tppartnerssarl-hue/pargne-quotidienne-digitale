@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
+import { Route as AuthenticatedRechercheRouteImport } from './routes/_authenticated/recherche'
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
@@ -44,6 +45,11 @@ const AuthenticatedCaisseRoute = AuthenticatedCaisseRouteImport.update({
 const AuthenticatedCollecteRoute = AuthenticatedCollecteRouteImport.update({
   id: '/collecte',
   path: '/collecte',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRechercheRoute = AuthenticatedRechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRetraitsRoute = AuthenticatedRetraitsRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
+  '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
+  '/_authenticated/recherche': typeof AuthenticatedRechercheRoute
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/caisse'
     | '/collecte'
+    | '/recherche'
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/caisse'
     | '/collecte'
+    | '/recherche'
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
+    | '/_authenticated/recherche'
     | '/_authenticated/retraits'
     | '/_authenticated/tableau-de-bord'
     | '/_authenticated/vente'
@@ -211,6 +223,13 @@ declare module '@tanstack/react-router' {
       path: '/collecte'
       fullPath: '/collecte'
       preLoaderRoute: typeof AuthenticatedCollecteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/recherche': {
+      id: '/_authenticated/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof AuthenticatedRechercheRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/retraits': {
@@ -268,6 +287,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
+  AuthenticatedRechercheRoute: typeof AuthenticatedRechercheRoute
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
@@ -280,6 +300,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
+  AuthenticatedRechercheRoute: AuthenticatedRechercheRoute,
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
