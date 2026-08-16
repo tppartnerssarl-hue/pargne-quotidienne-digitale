@@ -20,6 +20,7 @@ import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
 import { Route as AuthenticatedLivretsIndexRouteImport } from './routes/_authenticated/livrets.index'
+import { Route as AuthenticatedLivretsIdRouteImport } from './routes/_authenticated/livrets.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -79,6 +80,11 @@ const AuthenticatedLivretsIndexRoute =
     path: '/livrets/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLivretsIdRoute = AuthenticatedLivretsIdRouteImport.update({
+  id: '/livrets/$id',
+  path: '/livrets/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
   '/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
   '/livrets': typeof AuthenticatedLivretsIndexRoute
 }
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
   '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
+  '/_authenticated/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
   '/_authenticated/livrets/': typeof AuthenticatedLivretsIndexRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/tableau-de-bord'
     | '/vente'
     | '/epargnants/$id'
+    | '/livrets/$id'
     | '/epargnants/'
     | '/livrets/'
   fileRoutesByTo: FileRoutesByTo
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/tableau-de-bord'
     | '/vente'
     | '/epargnants/$id'
+    | '/livrets/$id'
     | '/epargnants'
     | '/livrets'
   id:
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tableau-de-bord'
     | '/_authenticated/vente'
     | '/_authenticated/epargnants/$id'
+    | '/_authenticated/livrets/$id'
     | '/_authenticated/epargnants/'
     | '/_authenticated/livrets/'
   fileRoutesById: FileRoutesById
@@ -243,6 +255,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLivretsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/livrets/$id': {
+      id: '/_authenticated/livrets/$id'
+      path: '/livrets/$id'
+      fullPath: '/livrets/$id'
+      preLoaderRoute: typeof AuthenticatedLivretsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -253,6 +272,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
   AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
+  AuthenticatedLivretsIdRoute: typeof AuthenticatedLivretsIdRoute
   AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
   AuthenticatedLivretsIndexRoute: typeof AuthenticatedLivretsIndexRoute
 }
@@ -264,6 +284,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
   AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
+  AuthenticatedLivretsIdRoute: AuthenticatedLivretsIdRoute,
   AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
   AuthenticatedLivretsIndexRoute: AuthenticatedLivretsIndexRoute,
 }
