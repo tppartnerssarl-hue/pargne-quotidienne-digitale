@@ -21,6 +21,7 @@ import { Route as AuthenticatedRechercheRouteImport } from './routes/_authentica
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
+import { Route as AuthenticatedUtilisateursRouteImport } from './routes/_authenticated/utilisateurs'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
@@ -88,6 +89,12 @@ const AuthenticatedTableauDeBordRoute =
     path: '/tableau-de-bord',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedUtilisateursRoute =
+  AuthenticatedUtilisateursRouteImport.update({
+    id: '/utilisateurs',
+    path: '/utilisateurs',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
   id: '/vente',
   path: '/vente',
@@ -129,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/stock': typeof AuthenticatedStockRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/livrets/$id': typeof AuthenticatedLivretsIdRoute
@@ -147,6 +155,7 @@ export interface FileRoutesByTo {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/stock': typeof AuthenticatedStockRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/livrets/$id': typeof AuthenticatedLivretsIdRoute
@@ -167,6 +176,7 @@ export interface FileRoutesById {
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
+  '/_authenticated/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
   '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/_authenticated/livrets/$id': typeof AuthenticatedLivretsIdRoute
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/stock'
     | '/tableau-de-bord'
+    | '/utilisateurs'
     | '/vente'
     | '/epargnants/$id'
     | '/livrets/$id'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/stock'
     | '/tableau-de-bord'
+    | '/utilisateurs'
     | '/vente'
     | '/epargnants/$id'
     | '/livrets/$id'
@@ -224,6 +236,7 @@ export interface FileRouteTypes {
     | '/_authenticated/retraits'
     | '/_authenticated/stock'
     | '/_authenticated/tableau-de-bord'
+    | '/_authenticated/utilisateurs'
     | '/_authenticated/vente'
     | '/_authenticated/epargnants/$id'
     | '/_authenticated/livrets/$id'
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/utilisateurs': {
+      id: '/_authenticated/utilisateurs'
+      path: '/utilisateurs'
+      fullPath: '/utilisateurs'
+      preLoaderRoute: typeof AuthenticatedUtilisateursRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/vente': {
       id: '/_authenticated/vente'
       path: '/vente'
@@ -371,6 +391,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
+  AuthenticatedUtilisateursRoute: typeof AuthenticatedUtilisateursRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
   AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
   AuthenticatedLivretsIdRoute: typeof AuthenticatedLivretsIdRoute
@@ -388,6 +409,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
+  AuthenticatedUtilisateursRoute: AuthenticatedUtilisateursRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
   AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
   AuthenticatedLivretsIdRoute: AuthenticatedLivretsIdRoute,
