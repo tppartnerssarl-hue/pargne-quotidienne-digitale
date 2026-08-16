@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAgencesRouteImport } from './routes/_authenticated/agences'
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
@@ -39,6 +40,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAgencesRoute = AuthenticatedAgencesRouteImport.update({
+  id: '/agences',
+  path: '/agences',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCaisseRoute = AuthenticatedCaisseRouteImport.update({
   id: '/caisse',
@@ -114,6 +120,7 @@ const AuthenticatedLivretsIdRoute = AuthenticatedLivretsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agences': typeof AuthenticatedAgencesRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agences': typeof AuthenticatedAgencesRoute
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/agences': typeof AuthenticatedAgencesRoute
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/agences'
     | '/caisse'
     | '/collecte'
     | '/commissions'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/agences'
     | '/caisse'
     | '/collecte'
     | '/commissions'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/agences'
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
     | '/_authenticated/commissions'
@@ -247,6 +259,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/agences': {
+      id: '/_authenticated/agences'
+      path: '/agences'
+      fullPath: '/agences'
+      preLoaderRoute: typeof AuthenticatedAgencesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/caisse': {
       id: '/_authenticated/caisse'
@@ -343,6 +362,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgencesRoute: typeof AuthenticatedAgencesRoute
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
@@ -359,6 +379,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgencesRoute: AuthenticatedAgencesRoute,
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
