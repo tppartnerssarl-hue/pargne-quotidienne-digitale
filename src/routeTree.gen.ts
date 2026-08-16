@@ -18,6 +18,7 @@ import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
+import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,6 +66,12 @@ const AuthenticatedEpargnantsIndexRoute =
     path: '/epargnants/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedEpargnantsIdRoute =
+  AuthenticatedEpargnantsIdRouteImport.update({
+    id: '/epargnants/$id',
+    path: '/epargnants/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
   '/retraits': typeof AuthenticatedRetraitsRoute
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRoutesById {
@@ -96,6 +105,7 @@ export interface FileRoutesById {
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
+  '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
+    | '/epargnants/$id'
     | '/epargnants/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/retraits'
     | '/tableau-de-bord'
     | '/vente'
+    | '/epargnants/$id'
     | '/epargnants'
   id:
     | '__root__'
@@ -129,6 +141,7 @@ export interface FileRouteTypes {
     | '/_authenticated/retraits'
     | '/_authenticated/tableau-de-bord'
     | '/_authenticated/vente'
+    | '/_authenticated/epargnants/$id'
     | '/_authenticated/epargnants/'
   fileRoutesById: FileRoutesById
 }
@@ -203,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEpargnantsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/epargnants/$id': {
+      id: '/_authenticated/epargnants/$id'
+      path: '/epargnants/$id'
+      fullPath: '/epargnants/$id'
+      preLoaderRoute: typeof AuthenticatedEpargnantsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -212,6 +232,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
+  AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
   AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
 }
 
@@ -221,6 +242,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
+  AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
   AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
 }
 
