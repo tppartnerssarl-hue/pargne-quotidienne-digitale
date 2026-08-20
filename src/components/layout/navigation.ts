@@ -13,6 +13,7 @@ import {
   UserCog,
   Settings,
   ScrollText,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react";
 import type { CodeRole } from "@/lib/constantes";
@@ -76,6 +77,7 @@ export const NAVIGATION: Entree[] = [
     roles: ["ADMINISTRATEUR", "DIRECTION", "RESPONSABLE_AGENCE"],
   },
   { libelle: "Rapports", chemin: "/rapports", icone: FileBarChart, groupe: "Pilotage" },
+  { libelle: "Guide d'utilisation", chemin: "/guide", icone: BookOpen, groupe: "Pilotage" },
   {
     libelle: "Agences",
     chemin: "/agences",

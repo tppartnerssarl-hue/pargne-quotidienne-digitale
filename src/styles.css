@@ -188,3 +188,38 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
+
+/* --- Impression des reçus -------------------------------------------------
+   Seul le bloc `.zone-recu` est imprimé ; tout le reste de l'interface est
+   masqué (menus, boutons, tableaux). */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .zone-recu,
+  .zone-recu * {
+    visibility: visible !important;
+  }
+
+  .zone-recu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80mm;
+    max-width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    margin: 10mm;
+  }
+}

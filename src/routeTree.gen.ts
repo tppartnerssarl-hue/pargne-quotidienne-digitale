@@ -17,6 +17,7 @@ import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
+import { Route as AuthenticatedGuideRouteImport } from './routes/_authenticated/guide'
 import { Route as AuthenticatedParametresRouteImport } from './routes/_authenticated/parametres'
 import { Route as AuthenticatedRapportsRouteImport } from './routes/_authenticated/rapports'
 import { Route as AuthenticatedRechercheRouteImport } from './routes/_authenticated/recherche'
@@ -70,6 +71,11 @@ const AuthenticatedCommissionsRoute =
     path: '/commissions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedGuideRoute = AuthenticatedGuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedParametresRoute = AuthenticatedParametresRouteImport.update({
   id: '/parametres',
   path: '/parametres',
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
+  '/guide': typeof AuthenticatedGuideRoute
   '/parametres': typeof AuthenticatedParametresRoute
   '/rapports': typeof AuthenticatedRapportsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
+  '/guide': typeof AuthenticatedGuideRoute
   '/parametres': typeof AuthenticatedParametresRoute
   '/rapports': typeof AuthenticatedRapportsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
+  '/_authenticated/guide': typeof AuthenticatedGuideRoute
   '/_authenticated/parametres': typeof AuthenticatedParametresRoute
   '/_authenticated/rapports': typeof AuthenticatedRapportsRoute
   '/_authenticated/recherche': typeof AuthenticatedRechercheRoute
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
     | '/caisse'
     | '/collecte'
     | '/commissions'
+    | '/guide'
     | '/parametres'
     | '/rapports'
     | '/recherche'
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/caisse'
     | '/collecte'
     | '/commissions'
+    | '/guide'
     | '/parametres'
     | '/rapports'
     | '/recherche'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
     | '/_authenticated/commissions'
+    | '/_authenticated/guide'
     | '/_authenticated/parametres'
     | '/_authenticated/rapports'
     | '/_authenticated/recherche'
@@ -330,6 +342,13 @@ declare module '@tanstack/react-router' {
       path: '/commissions'
       fullPath: '/commissions'
       preLoaderRoute: typeof AuthenticatedCommissionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/guide': {
+      id: '/_authenticated/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof AuthenticatedGuideRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/parametres': {
@@ -425,6 +444,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
+  AuthenticatedGuideRoute: typeof AuthenticatedGuideRoute
   AuthenticatedParametresRoute: typeof AuthenticatedParametresRoute
   AuthenticatedRapportsRoute: typeof AuthenticatedRapportsRoute
   AuthenticatedRechercheRoute: typeof AuthenticatedRechercheRoute
@@ -445,6 +465,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
+  AuthenticatedGuideRoute: AuthenticatedGuideRoute,
   AuthenticatedParametresRoute: AuthenticatedParametresRoute,
   AuthenticatedRapportsRoute: AuthenticatedRapportsRoute,
   AuthenticatedRechercheRoute: AuthenticatedRechercheRoute,
