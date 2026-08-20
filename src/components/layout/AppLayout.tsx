@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
-import { LogOut, Menu, Search, X, PiggyBank } from "lucide-react";
+import { LogOut, Menu, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { entreesAutorisees, GROUPES } from "./navigation";
@@ -61,10 +61,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-background">
       {/* Barre latérale — desktop */}
       <aside className="bg-sidebar border-sidebar-border fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r lg:flex">
-        <div className="border-sidebar-border flex items-center gap-2 border-b px-5 py-4">
-          <span className="bg-sidebar-primary text-sidebar-primary-foreground flex h-8 w-8 items-center justify-center rounded-md">
-            <PiggyBank className="h-4 w-4" aria-hidden />
-          </span>
+        <div className="border-sidebar-border flex items-center gap-3 border-b px-5 py-4">
+          <img
+            src="/mboacreditunion.jpg"
+            alt="MboaCreditUnion logo"
+            className="h-10 w-10 rounded-md object-cover shrink-0"
+          />
           <span className="text-sidebar-foreground font-display text-sm leading-tight font-semibold">
             Épargne
             <br />
@@ -86,7 +88,14 @@ export function AppLayout({ children }: { children: ReactNode }) {
           />
           <div className="bg-sidebar absolute inset-y-0 left-0 w-72 overflow-y-auto">
             <div className="border-sidebar-border flex items-center justify-between border-b px-4 py-3">
-              <span className="text-sidebar-foreground font-display font-semibold">Menu</span>
+              <div className="flex items-center gap-2">
+                <img
+                  src="/mboacreditunion.jpg"
+                  alt="MboaCreditUnion logo"
+                  className="h-8 w-8 rounded-md object-cover shrink-0"
+                />
+                <span className="text-sidebar-foreground font-display font-semibold">Menu</span>
+              </div>
               <button
                 onClick={() => setOuvert(false)}
                 className="text-sidebar-foreground/70"
