@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { Printer } from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -27,7 +28,15 @@ import {
 import { EnTetePage } from "@/components/commun/EnTetePage";
 import { StatutOperation } from "@/components/commun/Badges";
 import { useConfiguration } from "@/hooks/useConfiguration";
-import { formaterMontant, formaterDate, aujourdhui, messageErreur } from "@/lib/format";
+import { RecuImpression } from "@/components/commun/RecuImpression";
+import { chargerOperationRecu, type DonneesRecu } from "@/lib/recu";
+import {
+  formaterMontant,
+  formaterDate,
+  formaterDateHeure,
+  aujourdhui,
+  messageErreur,
+} from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/retraits")({
   head: () => ({
@@ -61,6 +70,44 @@ function PageRetraits() {
   const [montant, setMontant] = useState("");
   const [date, setDate] = useState(aujourdhui());
   const [confirmation, setConfirmation] = useState(false);
+  const [recu, setRecu] = useState<DonneesRecu | null>(null);
+  const [recuOuvert, setRecuOuvert] = useState(false);
+
+  const ouvrirRecu = async (idOperation: string) => {
+    setRecu(null);
+    setRecuOuvert(true);
+    try {
+      const o = await chargerOperationRecu(idOperation);
+      if (!o) throw new Error("Opération introuvable");
+      setRecu({
+        titre: "Reçu de retrait",
+        reference: o.reference,
+        dateTexte: `${formaterDate(o.date_operation, config)} (émis le ${formaterDateHeure(
+          o.date_creation,
+          config,
+        )})`,
+        lignes: [
+          { label: "Agence", valeur: o.agence ? `${o.agence.nom} (${o.agence.code})` : "—" },
+          { label: "Livret", valeur: o.livret?.numero_livret ?? "—" },
+          {
+            label: "Épargnant",
+            valeur: o.epargnant ? `${o.epargnant.prenom} ${o.epargnant.nom}` : "—",
+          },
+          { label: "N° client", valeur: o.epargnant?.numero_client ?? "—" },
+          {
+            label: "Caissier",
+            valeur: o.operateur ? `${o.operateur.prenom} ${o.operateur.nom}` : "—",
+          },
+          { label: "Statut", valeur: o.statut === "VALIDEE" ? "Validé" : "En attente" },
+        ],
+        montantLibelle: "Montant retiré",
+        montantTexte: formaterMontant(o.montant, config),
+      });
+    } catch (e) {
+      setRecuOuvert(false);
+      toast.error("Reçu indisponible", { description: messageErreur(e) });
+    }
+  };
 
   const livrets = useQuery({
     queryKey: ["livrets-actifs-retrait"],
@@ -105,8 +152,9 @@ function PageRetraits() {
       if (error) throw error;
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (idOperation) => {
       toast.success("Retrait enregistré");
+      if (typeof idOperation === "string") void ouvrirRecu(idOperation);
       setMontant("");
       setConfirmation(false);
       void client.invalidateQueries({ queryKey: ["livrets-actifs-retrait"] });
@@ -209,6 +257,7 @@ function PageRetraits() {
                   <th className="px-4 py-2 font-medium">Date</th>
                   <th className="px-4 py-2 text-right font-medium">Montant</th>
                   <th className="px-4 py-2 font-medium">Statut</th>
+                  <th className="px-4 py-2 font-medium">Reçu</th>
                 </tr>
               </thead>
               <tbody>
@@ -222,6 +271,16 @@ function PageRetraits() {
                     <td className="px-4 py-2">
                       <StatutOperation statut={o.statut} />
                     </td>
+                    <td className="px-4 py-2">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => void ouvrirRecu(o.id_operation)}
+                      >
+                        <Printer className="mr-1.5 size-4" />
+                        Imprimer
+                      </Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -229,6 +288,8 @@ function PageRetraits() {
           </div>
         </section>
       </div>
+
+      <RecuImpression recu={recu} ouvert={recuOuvert} onOuvertChange={setRecuOuvert} />
 
       <AlertDialog open={confirmation} onOpenChange={setConfirmation}>
         <AlertDialogContent>
