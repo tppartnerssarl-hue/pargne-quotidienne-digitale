@@ -52,7 +52,7 @@ Cette plateforme numérise les opérations d'une société d'épargne quotidienn
 | Icônes | Lucide React |
 | Build | Vite v8 |
 | Runtime / déploiement | Nitro → Cloudflare Workers |
-| Plateforme | Lovable Cloud (synchronisation Git ↔ éditeur Lovable) |
+
 
 ---
 
