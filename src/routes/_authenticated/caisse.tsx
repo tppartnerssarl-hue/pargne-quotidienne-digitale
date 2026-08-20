@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { Printer } from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -13,6 +14,8 @@ import { StatutRemise } from "@/components/commun/Badges";
 import { EtatChargement, EtatErreur, EtatVide } from "@/components/commun/Etats";
 import { useAuth } from "@/hooks/useAuth";
 import { useConfiguration } from "@/hooks/useConfiguration";
+import { RecuImpression } from "@/components/commun/RecuImpression";
+import type { DonneesRecu } from "@/lib/recu";
 import { formaterMontant, formaterDate, aujourdhui, messageErreur } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/caisse")({
@@ -43,13 +46,49 @@ const schemaRemise = z.object({
 function PageCaisse() {
   const config = useConfiguration();
   const client = useQueryClient();
-  const { aRole } = useAuth();
+  const { aRole, profil } = useAuth();
   const peutControler = aRole("CAISSIER", "RESPONSABLE_AGENCE", "ADMINISTRATEUR", "DIRECTION");
 
   const [montant, setMontant] = useState("");
   const [date, setDate] = useState(aujourdhui());
   const [commentaire, setCommentaire] = useState("");
   const [controles, setControles] = useState<Record<string, string>>({});
+  const [recu, setRecu] = useState<DonneesRecu | null>(null);
+  const [recuOuvert, setRecuOuvert] = useState(false);
+
+  const ouvrirRecuRemise = (r: {
+    reference: string;
+    date_remise: string;
+    montant_attendu: number | string;
+    montant_declare: number | string;
+    montant_controle: number | string | null;
+    ecart: number | string | null;
+    statut: string;
+  }) => {
+    setRecu({
+      titre: "Reçu de remise de caisse",
+      reference: r.reference,
+      dateTexte: formaterDate(r.date_remise, config),
+      lignes: [
+        { label: "Remis par", valeur: profil ? `${profil.prenom} ${profil.nom}` : "—" },
+        { label: "Agence", valeur: profil?.agence?.nom ?? "—" },
+        { label: "Montant attendu", valeur: formaterMontant(r.montant_attendu, config) },
+        {
+          label: "Montant contrôlé",
+          valeur: r.montant_controle === null ? "—" : formaterMontant(r.montant_controle, config),
+        },
+        {
+          label: "Écart",
+          valeur: r.ecart === null ? "—" : formaterMontant(r.ecart, config),
+        },
+        { label: "Statut", valeur: r.statut },
+      ],
+      montantLibelle: "Montant déclaré",
+      montantTexte: formaterMontant(r.montant_declare, config),
+      mention: "Reçu de remise de caisse — à conserver par les deux parties.",
+    });
+    setRecuOuvert(true);
+  };
 
   const remises = useQuery({
     queryKey: ["remises"],
@@ -186,6 +225,7 @@ function PageCaisse() {
                     <th className="px-4 py-2 text-right font-medium">Déclaré</th>
                     <th className="px-4 py-2 text-right font-medium">Écart</th>
                     <th className="px-4 py-2 font-medium">Statut</th>
+                    <th className="px-4 py-2 font-medium">Reçu</th>
                     {peutControler ? <th className="px-4 py-2 font-medium">Contrôle</th> : null}
                   </tr>
                 </thead>
@@ -209,6 +249,12 @@ function PageCaisse() {
                       </td>
                       <td className="px-4 py-2">
                         <StatutRemise statut={r.statut} />
+                      </td>
+                      <td className="px-4 py-2">
+                        <Button size="sm" variant="ghost" onClick={() => ouvrirRecuRemise(r)}>
+                          <Printer className="mr-1.5 size-4" />
+                          Imprimer
+                        </Button>
                       </td>
                       {peutControler ? (
                         <td className="px-4 py-2">
@@ -254,6 +300,8 @@ function PageCaisse() {
           )}
         </section>
       </div>
+
+      <RecuImpression recu={recu} ouvert={recuOuvert} onOuvertChange={setRecuOuvert} />
     </>
   );
 }
