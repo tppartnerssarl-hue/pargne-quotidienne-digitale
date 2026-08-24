@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/mboacreditunion.jpg", type: "image/jpeg" },
       { rel: "apple-touch-icon", href: "/mboacreditunion.jpg" },
-      { property: "og:image", content: "/mboacreditunion.jpg" },
+
     ],
   }),
   shellComponent: RootShell,
