@@ -59,11 +59,15 @@ export type Database = {
           adresse_ip: string | null
           ancienne_valeur: Json | null
           auth_user_id: string | null
+          code_role: string | null
+          contexte: string | null
           date_action: string
+          id_agence: string | null
           id_audit: string
           id_cible: string | null
           id_utilisateur: string | null
           nouvelle_valeur: Json | null
+          resultat: string
           table_cible: string
         }
         Insert: {
@@ -71,11 +75,15 @@ export type Database = {
           adresse_ip?: string | null
           ancienne_valeur?: Json | null
           auth_user_id?: string | null
+          code_role?: string | null
+          contexte?: string | null
           date_action?: string
+          id_agence?: string | null
           id_audit?: string
           id_cible?: string | null
           id_utilisateur?: string | null
           nouvelle_valeur?: Json | null
+          resultat?: string
           table_cible: string
         }
         Update: {
@@ -83,14 +91,32 @@ export type Database = {
           adresse_ip?: string | null
           ancienne_valeur?: Json | null
           auth_user_id?: string | null
+          code_role?: string | null
+          contexte?: string | null
           date_action?: string
+          id_agence?: string | null
           id_audit?: string
           id_cible?: string | null
           id_utilisateur?: string | null
           nouvelle_valeur?: Json | null
+          resultat?: string
           table_cible?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "audit_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "audit_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
           {
             foreignKeyName: "audit_id_utilisateur_fkey"
             columns: ["id_utilisateur"]
@@ -264,7 +290,7 @@ export type Database = {
       }
       epargnant: {
         Row: {
-          adresse: string | null
+          adresse: string
           created_at: string
           date_creation: string
           est_demo: boolean
@@ -272,14 +298,14 @@ export type Database = {
           id_epargnant: string
           nom: string
           numero_client: string
-          numero_cni: string | null
+          numero_cni: string
           prenom: string
           statut: string
-          telephone: string | null
+          telephone: string
           updated_at: string
         }
         Insert: {
-          adresse?: string | null
+          adresse: string
           created_at?: string
           date_creation?: string
           est_demo?: boolean
@@ -287,14 +313,14 @@ export type Database = {
           id_epargnant?: string
           nom: string
           numero_client: string
-          numero_cni?: string | null
+          numero_cni: string
           prenom: string
           statut?: string
-          telephone?: string | null
+          telephone: string
           updated_at?: string
         }
         Update: {
-          adresse?: string | null
+          adresse?: string
           created_at?: string
           date_creation?: string
           est_demo?: boolean
@@ -302,10 +328,10 @@ export type Database = {
           id_epargnant?: string
           nom?: string
           numero_client?: string
-          numero_cni?: string | null
+          numero_cni?: string
           prenom?: string
           statut?: string
-          telephone?: string | null
+          telephone?: string
           updated_at?: string
         }
         Relationships: [
@@ -686,6 +712,64 @@ export type Database = {
           statut?: string
         }
         Relationships: []
+      }
+      prix_carnet: {
+        Row: {
+          actif: boolean
+          commentaire: string | null
+          created_at: string
+          date_effet: string
+          id_agence: string
+          id_prix: string
+          id_utilisateur: string | null
+          montant: number
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          commentaire?: string | null
+          created_at?: string
+          date_effet?: string
+          id_agence: string
+          id_prix?: string
+          id_utilisateur?: string | null
+          montant: number
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          commentaire?: string | null
+          created_at?: string
+          date_effet?: string
+          id_agence?: string
+          id_prix?: string
+          id_utilisateur?: string | null
+          montant?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prix_carnet_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "prix_carnet_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "prix_carnet_id_utilisateur_fkey"
+            columns: ["id_utilisateur"]
+            isOneToOne: false
+            referencedRelation: "utilisateur"
+            referencedColumns: ["id_utilisateur"]
+          },
+        ]
       }
       regle_commission: {
         Row: {
@@ -1075,6 +1159,14 @@ export type Database = {
     Functions: {
       a_role: { Args: { _code: string }; Returns: boolean }
       acces_agence: { Args: { _id_agence: string }; Returns: boolean }
+      affecter_livrets_collectrice: {
+        Args: {
+          _commentaire?: string
+          _id_collectrice: string
+          _ids_livret: string[]
+        }
+        Returns: number
+      }
       agence_courante: { Args: never; Returns: string }
       annuler_operation: {
         Args: { _id_operation: string; _motif: string }
@@ -1101,6 +1193,15 @@ export type Database = {
       }
       creer_remise: {
         Args: { _commentaire?: string; _date: string; _montant_declare: number }
+        Returns: string
+      }
+      definir_prix_carnet: {
+        Args: {
+          _commentaire?: string
+          _date_effet?: string
+          _id_agence: string
+          _montant: number
+        }
         Returns: string
       }
       enregistrer_collecte: {
@@ -1157,10 +1258,15 @@ export type Database = {
         Args: { _prefixe: string; _seq: unknown }
         Returns: string
       }
+      prix_carnet_courant: { Args: { _id_agence: string }; Returns: number }
       prochain_numero_client: { Args: never; Returns: string }
       receptionner_livrets: {
         Args: { _id_agence: string; _numeros: string[] }
         Returns: number
+      }
+      transferer_livret: {
+        Args: { _id_collectrice: string; _id_livret: string; _motif: string }
+        Returns: string
       }
       utilisateur_courant: { Args: never; Returns: string }
       valider_operation: { Args: { _id_operation: string }; Returns: string }
