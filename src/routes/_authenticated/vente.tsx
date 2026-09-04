@@ -213,7 +213,11 @@ function PageVente() {
           </div>
         </div>
 
-        <Button type="submit" className="w-full sm:w-auto" disabled={vendre.isPending}>
+        <Button
+          type="submit"
+          className="w-full sm:w-auto"
+          disabled={vendre.isPending || prixDefaut === null}
+        >
           {vendre.isPending ? "Enregistrement…" : "Attribuer le livret"}
         </Button>
       </form>
