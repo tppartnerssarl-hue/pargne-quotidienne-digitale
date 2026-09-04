@@ -17,6 +17,7 @@ import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated/caisse'
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
+import { Route as AuthenticatedMesCarnetsRouteImport } from './routes/_authenticated/mes-carnets'
 import { Route as AuthenticatedParametresRouteImport } from './routes/_authenticated/parametres'
 import { Route as AuthenticatedPrixCarnetRouteImport } from './routes/_authenticated/prix-carnet'
 import { Route as AuthenticatedRapportsRouteImport } from './routes/_authenticated/rapports'
@@ -71,6 +72,11 @@ const AuthenticatedCommissionsRoute =
     path: '/commissions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMesCarnetsRoute = AuthenticatedMesCarnetsRouteImport.update({
+  id: '/mes-carnets',
+  path: '/mes-carnets',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedParametresRoute = AuthenticatedParametresRouteImport.update({
   id: '/parametres',
   path: '/parametres',
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
+  '/mes-carnets': typeof AuthenticatedMesCarnetsRoute
   '/parametres': typeof AuthenticatedParametresRoute
   '/prix-carnet': typeof AuthenticatedPrixCarnetRoute
   '/rapports': typeof AuthenticatedRapportsRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/caisse': typeof AuthenticatedCaisseRoute
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
+  '/mes-carnets': typeof AuthenticatedMesCarnetsRoute
   '/parametres': typeof AuthenticatedParametresRoute
   '/prix-carnet': typeof AuthenticatedPrixCarnetRoute
   '/rapports': typeof AuthenticatedRapportsRoute
@@ -196,6 +204,7 @@ export interface FileRoutesById {
   '/_authenticated/caisse': typeof AuthenticatedCaisseRoute
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
+  '/_authenticated/mes-carnets': typeof AuthenticatedMesCarnetsRoute
   '/_authenticated/parametres': typeof AuthenticatedParametresRoute
   '/_authenticated/prix-carnet': typeof AuthenticatedPrixCarnetRoute
   '/_authenticated/rapports': typeof AuthenticatedRapportsRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/caisse'
     | '/collecte'
     | '/commissions'
+    | '/mes-carnets'
     | '/parametres'
     | '/prix-carnet'
     | '/rapports'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/caisse'
     | '/collecte'
     | '/commissions'
+    | '/mes-carnets'
     | '/parametres'
     | '/prix-carnet'
     | '/rapports'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/_authenticated/caisse'
     | '/_authenticated/collecte'
     | '/_authenticated/commissions'
+    | '/_authenticated/mes-carnets'
     | '/_authenticated/parametres'
     | '/_authenticated/prix-carnet'
     | '/_authenticated/rapports'
@@ -342,6 +354,13 @@ declare module '@tanstack/react-router' {
       path: '/commissions'
       fullPath: '/commissions'
       preLoaderRoute: typeof AuthenticatedCommissionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/mes-carnets': {
+      id: '/_authenticated/mes-carnets'
+      path: '/mes-carnets'
+      fullPath: '/mes-carnets'
+      preLoaderRoute: typeof AuthenticatedMesCarnetsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/parametres': {
@@ -444,6 +463,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCaisseRoute: typeof AuthenticatedCaisseRoute
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
+  AuthenticatedMesCarnetsRoute: typeof AuthenticatedMesCarnetsRoute
   AuthenticatedParametresRoute: typeof AuthenticatedParametresRoute
   AuthenticatedPrixCarnetRoute: typeof AuthenticatedPrixCarnetRoute
   AuthenticatedRapportsRoute: typeof AuthenticatedRapportsRoute
@@ -465,6 +485,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCaisseRoute: AuthenticatedCaisseRoute,
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
+  AuthenticatedMesCarnetsRoute: AuthenticatedMesCarnetsRoute,
   AuthenticatedParametresRoute: AuthenticatedParametresRoute,
   AuthenticatedPrixCarnetRoute: AuthenticatedPrixCarnetRoute,
   AuthenticatedRapportsRoute: AuthenticatedRapportsRoute,
