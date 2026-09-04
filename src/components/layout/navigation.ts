@@ -13,6 +13,7 @@ import {
   UserCog,
   Settings,
   ScrollText,
+  Tag,
   type LucideIcon,
 } from "lucide-react";
 import type { CodeRole } from "@/lib/constantes";
