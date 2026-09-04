@@ -118,7 +118,7 @@ function PagePrixCarnet() {
               ? "Non défini"
               : formaterMontant(courant.data, config)
           }
-          description={
+          detail={
             courant.data === null || courant.data === undefined
               ? "Aucun prix n'a encore été configuré pour cette agence."
               : "Appliqué automatiquement lors des ventes de carnet."
