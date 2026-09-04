@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/select";
 import { EnTetePage } from "@/components/commun/EnTetePage";
 import { EtatVide } from "@/components/commun/Etats";
-import { useConfiguration, useParametres } from "@/hooks/useConfiguration";
+import { useConfiguration } from "@/hooks/useConfiguration";
+import { usePrixCarnetCourant } from "@/hooks/usePrixCarnet";
 import { formaterMontant, aujourdhui, messageErreur } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/vente")({
@@ -47,14 +48,13 @@ const schema = z.object({
 
 function PageVente() {
   const config = useConfiguration();
-  const parametres = useParametres();
   const client = useQueryClient();
-  const prixDefaut = parametres.data?.find((p) => p.cle === "prix_carnet")?.valeur ?? "";
+  const prixCarnet = usePrixCarnetCourant();
+  const prixDefaut = prixCarnet.data ?? null;
 
   const [terme, setTerme] = useState("");
   const [idEpargnant, setIdEpargnant] = useState("");
   const [idLivret, setIdLivret] = useState("");
-  const [montant, setMontant] = useState("");
   const [date, setDate] = useState(aujourdhui());
 
   const epargnants = useQuery({
@@ -97,7 +97,7 @@ function PageVente() {
       const valeurs = schema.safeParse({
         id_epargnant: idEpargnant,
         id_livret: idLivret,
-        montant: Number(montant || prixDefaut || 0),
+        montant: Number(prixDefaut ?? 0),
         date,
       });
       if (!valeurs.success) throw new Error(valeurs.error.issues[0]!.message);
@@ -114,14 +114,13 @@ function PageVente() {
       toast.success("Livret attribué et vente enregistrée");
       setIdLivret("");
       setIdEpargnant("");
-      setMontant("");
       void client.invalidateQueries({ queryKey: ["livrets-disponibles"] });
       void client.invalidateQueries({ queryKey: ["tableau-de-bord"] });
     },
     onError: (e) => toast.error("Vente refusée", { description: messageErreur(e) }),
   });
 
-  const montantAffiche = Number(montant || prixDefaut || 0);
+  const montantAffiche = Number(prixDefaut ?? 0);
 
   return (
     <>
@@ -190,16 +189,15 @@ function PageVente() {
             <Label htmlFor="prix">Prix du carnet</Label>
             <Input
               id="prix"
-              type="number"
-              min={0}
-              step="1"
               className="montant"
-              value={montant || prixDefaut}
-              onChange={(e) => setMontant(e.target.value)}
-              required
+              value={prixDefaut === null ? "Non défini" : formaterMontant(montantAffiche, config)}
+              readOnly
+              aria-readonly
             />
             <p className="text-muted-foreground text-xs">
-              Montant encaissé : {formaterMontant(montantAffiche, config)}
+              {prixDefaut === null
+                ? "Aucun prix n'est configuré pour votre agence : la vente est impossible."
+                : "Prix en vigueur dans votre agence, non modifiable à la vente."}
             </p>
           </div>
           <div className="space-y-1.5">
