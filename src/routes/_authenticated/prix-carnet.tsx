@@ -89,7 +89,7 @@ function PagePrixCarnet() {
         _id_agence: v.data.id_agence,
         _montant: v.data.montant,
         _date_effet: v.data.date_effet,
-        _commentaire: v.data.commentaire ?? null,
+        ...(v.data.commentaire ? { _commentaire: v.data.commentaire } : {}),
       });
       if (error) throw error;
     },

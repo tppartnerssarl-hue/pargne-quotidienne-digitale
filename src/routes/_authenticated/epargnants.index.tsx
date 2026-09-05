@@ -52,9 +52,9 @@ export const Route = createFileRoute("/_authenticated/epargnants/")({
 const schema = z.object({
   nom: z.string().trim().min(1, "Le nom est obligatoire").max(100),
   prenom: z.string().trim().min(1, "Le prénom est obligatoire").max(100),
-  telephone: z.string().trim().max(30).optional(),
-  numero_cni: z.string().trim().max(50).optional(),
-  adresse: z.string().trim().max(255).optional(),
+  telephone: z.string().trim().min(6, "Le téléphone est obligatoire").max(30),
+  numero_cni: z.string().trim().min(3, "La pièce d'identité est obligatoire").max(50),
+  adresse: z.string().trim().min(3, "L'adresse est obligatoire").max(255),
   id_agence: z.string().uuid("Sélectionnez une agence"),
 });
 
@@ -106,21 +106,16 @@ function PageEpargnants() {
 
   const creer = useMutation({
     mutationFn: async () => {
-      const v = schema.safeParse({
-        ...form,
-        telephone: form.telephone || undefined,
-        numero_cni: form.numero_cni || undefined,
-        adresse: form.adresse || undefined,
-      });
+      const v = schema.safeParse(form);
       if (!v.success) throw new Error(v.error.issues[0]!.message);
       const { data: numero, error: erreurNumero } = await supabase.rpc("prochain_numero_client");
       if (erreurNumero) throw erreurNumero;
       const { error } = await supabase.from("epargnant").insert({
         nom: v.data.nom,
         prenom: v.data.prenom,
-        telephone: v.data.telephone ?? null,
-        numero_cni: v.data.numero_cni ?? null,
-        adresse: v.data.adresse ?? null,
+        telephone: v.data.telephone,
+        numero_cni: v.data.numero_cni,
+        adresse: v.data.adresse,
         id_agence: v.data.id_agence,
         numero_client: numero as string,
       });
@@ -191,6 +186,7 @@ function PageEpargnants() {
                       value={form.telephone}
                       onChange={(e) => setForm({ ...form, telephone: e.target.value })}
                       maxLength={30}
+                      required
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -200,6 +196,7 @@ function PageEpargnants() {
                       value={form.numero_cni}
                       onChange={(e) => setForm({ ...form, numero_cni: e.target.value })}
                       maxLength={50}
+                      required
                     />
                   </div>
                 </div>
@@ -210,6 +207,7 @@ function PageEpargnants() {
                     value={form.adresse}
                     onChange={(e) => setForm({ ...form, adresse: e.target.value })}
                     maxLength={255}
+                    required
                   />
                 </div>
                 <div className="space-y-1.5">
