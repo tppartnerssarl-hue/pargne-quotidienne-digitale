@@ -111,6 +111,24 @@ function PageFicheEpargnant() {
       </div>
 
       <section className="surface-card mt-6 overflow-hidden">
+        <h2 className="border-b px-4 py-3 text-sm font-semibold">Coordonnées et identité</h2>
+        <dl className="grid gap-4 p-4 text-sm sm:grid-cols-3">
+          <div>
+            <dt className="text-muted-foreground text-xs uppercase">Téléphone</dt>
+            <dd className="montant">{d.epargnant.telephone ?? "—"}</dd>
+          </div>
+          <div>
+            <dt className="text-muted-foreground text-xs uppercase">Pièce d'identité</dt>
+            <dd className="montant">{d.epargnant.numero_cni ?? "—"}</dd>
+          </div>
+          <div>
+            <dt className="text-muted-foreground text-xs uppercase">Adresse</dt>
+            <dd>{d.epargnant.adresse ?? "—"}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="surface-card mt-6 overflow-hidden">
         <h2 className="border-b px-4 py-3 text-sm font-semibold">Livrets rattachés</h2>
         {d.livrets.length === 0 ? (
           <div className="p-4">
