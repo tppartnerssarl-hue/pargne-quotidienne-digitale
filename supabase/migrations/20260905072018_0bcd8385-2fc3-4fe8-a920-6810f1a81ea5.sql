@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.controler_remise(uuid, numeric, boolean, text) FROM anon, PUBLIC;
