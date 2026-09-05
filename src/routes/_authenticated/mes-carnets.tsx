@@ -121,7 +121,6 @@ function PageMesCarnets() {
       const { error } = await supabase.rpc("affecter_livrets_collectrice", {
         _id_collectrice: destinataire,
         _ids_livret: selection,
-        _commentaire: undefined,
       });
       if (error) throw error;
     },
