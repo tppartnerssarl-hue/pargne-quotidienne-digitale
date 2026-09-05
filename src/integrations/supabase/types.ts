@@ -1183,14 +1183,24 @@ export type Database = {
         Args: { _id_livret: string; _motif?: string; _statut: string }
         Returns: string
       }
-      controler_remise: {
-        Args: {
-          _id_remise: string
-          _montant_controle: number
-          _valider?: boolean
-        }
-        Returns: string
-      }
+      controler_remise:
+        | {
+            Args: {
+              _id_remise: string
+              _montant_controle: number
+              _valider?: boolean
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              _commentaire?: string
+              _id_remise: string
+              _montant_controle: number
+              _valider?: boolean
+            }
+            Returns: string
+          }
       creer_remise: {
         Args: { _commentaire?: string; _date: string; _montant_declare: number }
         Returns: string
