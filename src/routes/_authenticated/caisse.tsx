@@ -53,6 +53,7 @@ function PageCaisse() {
   const [date, setDate] = useState(aujourdhui());
   const [commentaire, setCommentaire] = useState("");
   const [controles, setControles] = useState<Record<string, string>>({});
+  const [motifs, setMotifs] = useState<Record<string, string>>({});
   const [recu, setRecu] = useState<DonneesRecu | null>(null);
   const [recuOuvert, setRecuOuvert] = useState(false);
 
@@ -131,11 +132,20 @@ function PageCaisse() {
   });
 
   const controler = useMutation({
-    mutationFn: async ({ id, valeur }: { id: string; valeur: number }) => {
+    mutationFn: async ({
+      id,
+      valeur,
+      commentaire: motif,
+    }: {
+      id: string;
+      valeur: number;
+      commentaire?: string;
+    }) => {
       const { error } = await supabase.rpc("controler_remise", {
         _id_remise: id,
         _montant_controle: valeur,
         _valider: true,
+        ...(motif ? { _commentaire: motif } : {}),
       });
       if (error) throw error;
     },
@@ -275,6 +285,16 @@ function PageCaisse() {
                                   setControles((c) => ({ ...c, [r.id_remise]: e.target.value }))
                                 }
                               />
+                              <Input
+                                type="text"
+                                className="h-8 w-40"
+                                placeholder="Motif si écart"
+                                aria-label={`Motif de l'écart pour ${r.reference}`}
+                                value={motifs[r.id_remise] ?? ""}
+                                onChange={(e) =>
+                                  setMotifs((m) => ({ ...m, [r.id_remise]: e.target.value }))
+                                }
+                              />
                               <Button
                                 size="sm"
                                 variant="secondary"
@@ -283,6 +303,9 @@ function PageCaisse() {
                                   controler.mutate({
                                     id: r.id_remise,
                                     valeur: Number(controles[r.id_remise]),
+                                    ...(motifs[r.id_remise]?.trim()
+                                      ? { commentaire: motifs[r.id_remise]!.trim() }
+                                      : {}),
                                   })
                                 }
                               >

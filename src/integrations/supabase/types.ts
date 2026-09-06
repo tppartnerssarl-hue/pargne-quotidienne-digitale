@@ -296,6 +296,7 @@ export type Database = {
           est_demo: boolean
           id_agence: string
           id_epargnant: string
+          id_zone: string | null
           nom: string
           numero_client: string
           numero_cni: string
@@ -311,6 +312,7 @@ export type Database = {
           est_demo?: boolean
           id_agence: string
           id_epargnant?: string
+          id_zone?: string | null
           nom: string
           numero_client: string
           numero_cni: string
@@ -326,6 +328,7 @@ export type Database = {
           est_demo?: boolean
           id_agence?: string
           id_epargnant?: string
+          id_zone?: string | null
           nom?: string
           numero_client?: string
           numero_cni?: string
@@ -348,6 +351,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "v_stock_agence"
             referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "epargnant_id_zone_fkey"
+            columns: ["id_zone"]
+            isOneToOne: false
+            referencedRelation: "zone"
+            referencedColumns: ["id_zone"]
           },
         ]
       }
@@ -505,6 +515,74 @@ export type Database = {
           {
             foreignKeyName: "mouvement_livret_id_utilisateur_fkey"
             columns: ["id_utilisateur"]
+            isOneToOne: false
+            referencedRelation: "utilisateur"
+            referencedColumns: ["id_utilisateur"]
+          },
+        ]
+      }
+      objectif: {
+        Row: {
+          actif: boolean
+          annee: number
+          code_type: string
+          created_at: string
+          id_agence: string
+          id_collectrice: string | null
+          id_objectif: string
+          mois: number
+          montant_cible: number
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          annee: number
+          code_type: string
+          created_at?: string
+          id_agence: string
+          id_collectrice?: string | null
+          id_objectif?: string
+          mois: number
+          montant_cible: number
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          annee?: number
+          code_type?: string
+          created_at?: string
+          id_agence?: string
+          id_collectrice?: string | null
+          id_objectif?: string
+          mois?: number
+          montant_cible?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "objectif_code_type_fkey"
+            columns: ["code_type"]
+            isOneToOne: false
+            referencedRelation: "type_operation"
+            referencedColumns: ["code_type"]
+          },
+          {
+            foreignKeyName: "objectif_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "objectif_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "objectif_id_collectrice_fkey"
+            columns: ["id_collectrice"]
             isOneToOne: false
             referencedRelation: "utilisateur"
             referencedColumns: ["id_utilisateur"]
@@ -712,6 +790,85 @@ export type Database = {
           statut?: string
         }
         Relationships: []
+      }
+      planning_collecte: {
+        Row: {
+          actif: boolean
+          created_at: string
+          id_agence: string
+          id_collectrice: string
+          id_epargnant: string | null
+          id_planning: string
+          id_zone: string | null
+          jour_semaine: number
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          created_at?: string
+          id_agence: string
+          id_collectrice: string
+          id_epargnant?: string | null
+          id_planning?: string
+          id_zone?: string | null
+          jour_semaine: number
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          created_at?: string
+          id_agence?: string
+          id_collectrice?: string
+          id_epargnant?: string | null
+          id_planning?: string
+          id_zone?: string | null
+          jour_semaine?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planning_collecte_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "planning_collecte_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "planning_collecte_id_collectrice_fkey"
+            columns: ["id_collectrice"]
+            isOneToOne: false
+            referencedRelation: "utilisateur"
+            referencedColumns: ["id_utilisateur"]
+          },
+          {
+            foreignKeyName: "planning_collecte_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "epargnant"
+            referencedColumns: ["id_epargnant"]
+          },
+          {
+            foreignKeyName: "planning_collecte_id_epargnant_fkey"
+            columns: ["id_epargnant"]
+            isOneToOne: false
+            referencedRelation: "v_situation_individuelle"
+            referencedColumns: ["id_epargnant"]
+          },
+          {
+            foreignKeyName: "planning_collecte_id_zone_fkey"
+            columns: ["id_zone"]
+            isOneToOne: false
+            referencedRelation: "zone"
+            referencedColumns: ["id_zone"]
+          },
+        ]
       }
       prix_carnet: {
         Row: {
@@ -1054,6 +1211,51 @@ export type Database = {
           },
         ]
       }
+      zone: {
+        Row: {
+          actif: boolean
+          code: string
+          created_at: string
+          id_agence: string
+          id_zone: string
+          libelle: string
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          code: string
+          created_at?: string
+          id_agence: string
+          id_zone?: string
+          libelle: string
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          code?: string
+          created_at?: string
+          id_agence?: string
+          id_zone?: string
+          libelle?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "zone_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+        ]
+      }
     }
     Views: {
       v_situation_individuelle: {
@@ -1263,6 +1465,18 @@ export type Database = {
         }
         Returns: string
       }
+      epargnants_sans_collecte: {
+        Args: { _jours?: number }
+        Returns: {
+          derniere_collecte: string
+          id_epargnant: string
+          jours_sans_collecte: number
+          nom: string
+          numero_client: string
+          prenom: string
+          telephone: string
+        }[]
+      }
       est_admin: { Args: never; Returns: boolean }
       generer_reference: {
         Args: { _prefixe: string; _seq: unknown }
@@ -1273,6 +1487,17 @@ export type Database = {
       receptionner_livrets: {
         Args: { _id_agence: string; _numeros: string[] }
         Returns: number
+      }
+      suivi_objectifs: {
+        Args: { _annee: number; _mois: number }
+        Returns: {
+          code_type: string
+          collectrice: string
+          id_collectrice: string
+          montant_cible: number
+          montant_realise: number
+          taux_atteinte: number
+        }[]
       }
       transferer_livret: {
         Args: { _id_collectrice: string; _id_livret: string; _motif: string }
