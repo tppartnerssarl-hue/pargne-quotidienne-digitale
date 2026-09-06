@@ -521,6 +521,74 @@ export type Database = {
           },
         ]
       }
+      objectif: {
+        Row: {
+          actif: boolean
+          annee: number
+          code_type: string
+          created_at: string
+          id_agence: string
+          id_collectrice: string | null
+          id_objectif: string
+          mois: number
+          montant_cible: number
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          annee: number
+          code_type: string
+          created_at?: string
+          id_agence: string
+          id_collectrice?: string | null
+          id_objectif?: string
+          mois: number
+          montant_cible: number
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          annee?: number
+          code_type?: string
+          created_at?: string
+          id_agence?: string
+          id_collectrice?: string | null
+          id_objectif?: string
+          mois?: number
+          montant_cible?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "objectif_code_type_fkey"
+            columns: ["code_type"]
+            isOneToOne: false
+            referencedRelation: "type_operation"
+            referencedColumns: ["code_type"]
+          },
+          {
+            foreignKeyName: "objectif_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "objectif_id_agence_fkey"
+            columns: ["id_agence"]
+            isOneToOne: false
+            referencedRelation: "v_stock_agence"
+            referencedColumns: ["id_agence"]
+          },
+          {
+            foreignKeyName: "objectif_id_collectrice_fkey"
+            columns: ["id_collectrice"]
+            isOneToOne: false
+            referencedRelation: "utilisateur"
+            referencedColumns: ["id_utilisateur"]
+          },
+        ]
+      }
       operation: {
         Row: {
           code_type: string
@@ -1419,6 +1487,17 @@ export type Database = {
       receptionner_livrets: {
         Args: { _id_agence: string; _numeros: string[] }
         Returns: number
+      }
+      suivi_objectifs: {
+        Args: { _annee: number; _mois: number }
+        Returns: {
+          code_type: string
+          collectrice: string
+          id_collectrice: string
+          montant_cible: number
+          montant_realise: number
+          taux_atteinte: number
+        }[]
       }
       transferer_livret: {
         Args: { _id_collectrice: string; _id_livret: string; _motif: string }
