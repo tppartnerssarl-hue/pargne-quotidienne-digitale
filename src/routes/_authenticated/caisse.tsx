@@ -131,11 +131,20 @@ function PageCaisse() {
   });
 
   const controler = useMutation({
-    mutationFn: async ({ id, valeur }: { id: string; valeur: number }) => {
+    mutationFn: async ({
+      id,
+      valeur,
+      commentaire: motif,
+    }: {
+      id: string;
+      valeur: number;
+      commentaire?: string;
+    }) => {
       const { error } = await supabase.rpc("controler_remise", {
         _id_remise: id,
         _montant_controle: valeur,
         _valider: true,
+        ...(motif ? { _commentaire: motif } : {}),
       });
       if (error) throw error;
     },
