@@ -48,7 +48,7 @@ export const NAVIGATION: Entree[] = [
     chemin: "/vente",
     icone: ShoppingCart,
     groupe: "Opérations",
-    roles: ["ADMINISTRATEUR", "RESPONSABLE_AGENCE", "COLLECTRICE"],
+    roles: ["ADMINISTRATEUR", "RESPONSABLE_AGENCE", "COLLECTRICE", "CAISSIER"],
     mobile: true,
   },
   {
