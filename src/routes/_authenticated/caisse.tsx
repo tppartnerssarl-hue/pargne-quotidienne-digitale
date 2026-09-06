@@ -53,6 +53,7 @@ function PageCaisse() {
   const [date, setDate] = useState(aujourdhui());
   const [commentaire, setCommentaire] = useState("");
   const [controles, setControles] = useState<Record<string, string>>({});
+  const [motifs, setMotifs] = useState<Record<string, string>>({});
   const [recu, setRecu] = useState<DonneesRecu | null>(null);
   const [recuOuvert, setRecuOuvert] = useState(false);
 
