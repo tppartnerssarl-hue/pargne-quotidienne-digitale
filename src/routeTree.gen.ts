@@ -18,8 +18,11 @@ import { Route as AuthenticatedCaisseRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedCollecteRouteImport } from './routes/_authenticated/collecte'
 import { Route as AuthenticatedCommissionsRouteImport } from './routes/_authenticated/commissions'
 import { Route as AuthenticatedMesCarnetsRouteImport } from './routes/_authenticated/mes-carnets'
+import { Route as AuthenticatedObjectifsRouteImport } from './routes/_authenticated/objectifs'
 import { Route as AuthenticatedParametresRouteImport } from './routes/_authenticated/parametres'
+import { Route as AuthenticatedPlanningRouteImport } from './routes/_authenticated/planning'
 import { Route as AuthenticatedPrixCarnetRouteImport } from './routes/_authenticated/prix-carnet'
+import { Route as AuthenticatedRappelsRouteImport } from './routes/_authenticated/rappels'
 import { Route as AuthenticatedRapportsRouteImport } from './routes/_authenticated/rapports'
 import { Route as AuthenticatedRechercheRouteImport } from './routes/_authenticated/recherche'
 import { Route as AuthenticatedRetraitsRouteImport } from './routes/_authenticated/retraits'
@@ -27,6 +30,7 @@ import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated/tableau-de-bord'
 import { Route as AuthenticatedUtilisateursRouteImport } from './routes/_authenticated/utilisateurs'
 import { Route as AuthenticatedVenteRouteImport } from './routes/_authenticated/vente'
+import { Route as AuthenticatedZonesRouteImport } from './routes/_authenticated/zones'
 import { Route as AuthenticatedEpargnantsIndexRouteImport } from './routes/_authenticated/epargnants.index'
 import { Route as AuthenticatedEpargnantsIdRouteImport } from './routes/_authenticated/epargnants.$id'
 import { Route as AuthenticatedLivretsIndexRouteImport } from './routes/_authenticated/livrets.index'
@@ -77,14 +81,29 @@ const AuthenticatedMesCarnetsRoute = AuthenticatedMesCarnetsRouteImport.update({
   path: '/mes-carnets',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedObjectifsRoute = AuthenticatedObjectifsRouteImport.update({
+  id: '/objectifs',
+  path: '/objectifs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedParametresRoute = AuthenticatedParametresRouteImport.update({
   id: '/parametres',
   path: '/parametres',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPlanningRoute = AuthenticatedPlanningRouteImport.update({
+  id: '/planning',
+  path: '/planning',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPrixCarnetRoute = AuthenticatedPrixCarnetRouteImport.update({
   id: '/prix-carnet',
   path: '/prix-carnet',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRappelsRoute = AuthenticatedRappelsRouteImport.update({
+  id: '/rappels',
+  path: '/rappels',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRapportsRoute = AuthenticatedRapportsRouteImport.update({
@@ -124,6 +143,11 @@ const AuthenticatedVenteRoute = AuthenticatedVenteRouteImport.update({
   path: '/vente',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedZonesRoute = AuthenticatedZonesRouteImport.update({
+  id: '/zones',
+  path: '/zones',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedEpargnantsIndexRoute =
   AuthenticatedEpargnantsIndexRouteImport.update({
     id: '/epargnants/',
@@ -157,8 +181,11 @@ export interface FileRoutesByFullPath {
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
   '/mes-carnets': typeof AuthenticatedMesCarnetsRoute
+  '/objectifs': typeof AuthenticatedObjectifsRoute
   '/parametres': typeof AuthenticatedParametresRoute
+  '/planning': typeof AuthenticatedPlanningRoute
   '/prix-carnet': typeof AuthenticatedPrixCarnetRoute
+  '/rappels': typeof AuthenticatedRappelsRoute
   '/rapports': typeof AuthenticatedRapportsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
@@ -166,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/zones': typeof AuthenticatedZonesRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
@@ -180,8 +208,11 @@ export interface FileRoutesByTo {
   '/collecte': typeof AuthenticatedCollecteRoute
   '/commissions': typeof AuthenticatedCommissionsRoute
   '/mes-carnets': typeof AuthenticatedMesCarnetsRoute
+  '/objectifs': typeof AuthenticatedObjectifsRoute
   '/parametres': typeof AuthenticatedParametresRoute
+  '/planning': typeof AuthenticatedPlanningRoute
   '/prix-carnet': typeof AuthenticatedPrixCarnetRoute
+  '/rappels': typeof AuthenticatedRappelsRoute
   '/rapports': typeof AuthenticatedRapportsRoute
   '/recherche': typeof AuthenticatedRechercheRoute
   '/retraits': typeof AuthenticatedRetraitsRoute
@@ -189,6 +220,7 @@ export interface FileRoutesByTo {
   '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/vente': typeof AuthenticatedVenteRoute
+  '/zones': typeof AuthenticatedZonesRoute
   '/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/epargnants': typeof AuthenticatedEpargnantsIndexRoute
@@ -205,8 +237,11 @@ export interface FileRoutesById {
   '/_authenticated/collecte': typeof AuthenticatedCollecteRoute
   '/_authenticated/commissions': typeof AuthenticatedCommissionsRoute
   '/_authenticated/mes-carnets': typeof AuthenticatedMesCarnetsRoute
+  '/_authenticated/objectifs': typeof AuthenticatedObjectifsRoute
   '/_authenticated/parametres': typeof AuthenticatedParametresRoute
+  '/_authenticated/planning': typeof AuthenticatedPlanningRoute
   '/_authenticated/prix-carnet': typeof AuthenticatedPrixCarnetRoute
+  '/_authenticated/rappels': typeof AuthenticatedRappelsRoute
   '/_authenticated/rapports': typeof AuthenticatedRapportsRoute
   '/_authenticated/recherche': typeof AuthenticatedRechercheRoute
   '/_authenticated/retraits': typeof AuthenticatedRetraitsRoute
@@ -214,6 +249,7 @@ export interface FileRoutesById {
   '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
   '/_authenticated/utilisateurs': typeof AuthenticatedUtilisateursRoute
   '/_authenticated/vente': typeof AuthenticatedVenteRoute
+  '/_authenticated/zones': typeof AuthenticatedZonesRoute
   '/_authenticated/epargnants/$id': typeof AuthenticatedEpargnantsIdRoute
   '/_authenticated/livrets/$id': typeof AuthenticatedLivretsIdRoute
   '/_authenticated/epargnants/': typeof AuthenticatedEpargnantsIndexRoute
@@ -230,8 +266,11 @@ export interface FileRouteTypes {
     | '/collecte'
     | '/commissions'
     | '/mes-carnets'
+    | '/objectifs'
     | '/parametres'
+    | '/planning'
     | '/prix-carnet'
+    | '/rappels'
     | '/rapports'
     | '/recherche'
     | '/retraits'
@@ -239,6 +278,7 @@ export interface FileRouteTypes {
     | '/tableau-de-bord'
     | '/utilisateurs'
     | '/vente'
+    | '/zones'
     | '/epargnants/$id'
     | '/livrets/$id'
     | '/epargnants/'
@@ -253,8 +293,11 @@ export interface FileRouteTypes {
     | '/collecte'
     | '/commissions'
     | '/mes-carnets'
+    | '/objectifs'
     | '/parametres'
+    | '/planning'
     | '/prix-carnet'
+    | '/rappels'
     | '/rapports'
     | '/recherche'
     | '/retraits'
@@ -262,6 +305,7 @@ export interface FileRouteTypes {
     | '/tableau-de-bord'
     | '/utilisateurs'
     | '/vente'
+    | '/zones'
     | '/epargnants/$id'
     | '/livrets/$id'
     | '/epargnants'
@@ -277,8 +321,11 @@ export interface FileRouteTypes {
     | '/_authenticated/collecte'
     | '/_authenticated/commissions'
     | '/_authenticated/mes-carnets'
+    | '/_authenticated/objectifs'
     | '/_authenticated/parametres'
+    | '/_authenticated/planning'
     | '/_authenticated/prix-carnet'
+    | '/_authenticated/rappels'
     | '/_authenticated/rapports'
     | '/_authenticated/recherche'
     | '/_authenticated/retraits'
@@ -286,6 +333,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tableau-de-bord'
     | '/_authenticated/utilisateurs'
     | '/_authenticated/vente'
+    | '/_authenticated/zones'
     | '/_authenticated/epargnants/$id'
     | '/_authenticated/livrets/$id'
     | '/_authenticated/epargnants/'
@@ -363,6 +411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMesCarnetsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/objectifs': {
+      id: '/_authenticated/objectifs'
+      path: '/objectifs'
+      fullPath: '/objectifs'
+      preLoaderRoute: typeof AuthenticatedObjectifsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/parametres': {
       id: '/_authenticated/parametres'
       path: '/parametres'
@@ -370,11 +425,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedParametresRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/planning': {
+      id: '/_authenticated/planning'
+      path: '/planning'
+      fullPath: '/planning'
+      preLoaderRoute: typeof AuthenticatedPlanningRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/prix-carnet': {
       id: '/_authenticated/prix-carnet'
       path: '/prix-carnet'
       fullPath: '/prix-carnet'
       preLoaderRoute: typeof AuthenticatedPrixCarnetRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/rappels': {
+      id: '/_authenticated/rappels'
+      path: '/rappels'
+      fullPath: '/rappels'
+      preLoaderRoute: typeof AuthenticatedRappelsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/rapports': {
@@ -426,6 +495,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVenteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/zones': {
+      id: '/_authenticated/zones'
+      path: '/zones'
+      fullPath: '/zones'
+      preLoaderRoute: typeof AuthenticatedZonesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/epargnants/': {
       id: '/_authenticated/epargnants/'
       path: '/epargnants'
@@ -464,8 +540,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCollecteRoute: typeof AuthenticatedCollecteRoute
   AuthenticatedCommissionsRoute: typeof AuthenticatedCommissionsRoute
   AuthenticatedMesCarnetsRoute: typeof AuthenticatedMesCarnetsRoute
+  AuthenticatedObjectifsRoute: typeof AuthenticatedObjectifsRoute
   AuthenticatedParametresRoute: typeof AuthenticatedParametresRoute
+  AuthenticatedPlanningRoute: typeof AuthenticatedPlanningRoute
   AuthenticatedPrixCarnetRoute: typeof AuthenticatedPrixCarnetRoute
+  AuthenticatedRappelsRoute: typeof AuthenticatedRappelsRoute
   AuthenticatedRapportsRoute: typeof AuthenticatedRapportsRoute
   AuthenticatedRechercheRoute: typeof AuthenticatedRechercheRoute
   AuthenticatedRetraitsRoute: typeof AuthenticatedRetraitsRoute
@@ -473,6 +552,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
   AuthenticatedUtilisateursRoute: typeof AuthenticatedUtilisateursRoute
   AuthenticatedVenteRoute: typeof AuthenticatedVenteRoute
+  AuthenticatedZonesRoute: typeof AuthenticatedZonesRoute
   AuthenticatedEpargnantsIdRoute: typeof AuthenticatedEpargnantsIdRoute
   AuthenticatedLivretsIdRoute: typeof AuthenticatedLivretsIdRoute
   AuthenticatedEpargnantsIndexRoute: typeof AuthenticatedEpargnantsIndexRoute
@@ -486,8 +566,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCollecteRoute: AuthenticatedCollecteRoute,
   AuthenticatedCommissionsRoute: AuthenticatedCommissionsRoute,
   AuthenticatedMesCarnetsRoute: AuthenticatedMesCarnetsRoute,
+  AuthenticatedObjectifsRoute: AuthenticatedObjectifsRoute,
   AuthenticatedParametresRoute: AuthenticatedParametresRoute,
+  AuthenticatedPlanningRoute: AuthenticatedPlanningRoute,
   AuthenticatedPrixCarnetRoute: AuthenticatedPrixCarnetRoute,
+  AuthenticatedRappelsRoute: AuthenticatedRappelsRoute,
   AuthenticatedRapportsRoute: AuthenticatedRapportsRoute,
   AuthenticatedRechercheRoute: AuthenticatedRechercheRoute,
   AuthenticatedRetraitsRoute: AuthenticatedRetraitsRoute,
@@ -495,6 +578,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
   AuthenticatedUtilisateursRoute: AuthenticatedUtilisateursRoute,
   AuthenticatedVenteRoute: AuthenticatedVenteRoute,
+  AuthenticatedZonesRoute: AuthenticatedZonesRoute,
   AuthenticatedEpargnantsIdRoute: AuthenticatedEpargnantsIdRoute,
   AuthenticatedLivretsIdRoute: AuthenticatedLivretsIdRoute,
   AuthenticatedEpargnantsIndexRoute: AuthenticatedEpargnantsIndexRoute,
