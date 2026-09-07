@@ -14,6 +14,10 @@ import {
   Settings,
   ScrollText,
   Tag,
+  MapPin,
+  CalendarDays,
+  BellRing,
+  Target,
   type LucideIcon,
 } from "lucide-react";
 import type { CodeRole } from "@/lib/constantes";
