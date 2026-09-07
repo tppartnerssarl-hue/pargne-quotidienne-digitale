@@ -14,6 +14,10 @@ import {
   Settings,
   ScrollText,
   Tag,
+  MapPin,
+  CalendarDays,
+  BellRing,
+  Target,
   type LucideIcon,
 } from "lucide-react";
 import type { CodeRole } from "@/lib/constantes";
@@ -94,6 +98,35 @@ export const NAVIGATION: Entree[] = [
     chemin: "/prix-carnet",
     icone: Tag,
     groupe: "Référentiel",
+    roles: ["ADMINISTRATEUR", "DIRECTION", "RESPONSABLE_AGENCE"],
+  },
+  {
+    libelle: "Zones",
+    chemin: "/zones",
+    icone: MapPin,
+    groupe: "Référentiel",
+    roles: ["ADMINISTRATEUR", "DIRECTION", "RESPONSABLE_AGENCE"],
+  },
+  {
+    libelle: "Planning",
+    chemin: "/planning",
+    icone: CalendarDays,
+    groupe: "Opérations",
+    roles: ["ADMINISTRATEUR", "RESPONSABLE_AGENCE", "COLLECTRICE"],
+    mobile: true,
+  },
+  {
+    libelle: "Rappels",
+    chemin: "/rappels",
+    icone: BellRing,
+    groupe: "Opérations",
+    roles: ["ADMINISTRATEUR", "DIRECTION", "RESPONSABLE_AGENCE", "COLLECTRICE"],
+  },
+  {
+    libelle: "Objectifs",
+    chemin: "/objectifs",
+    icone: Target,
+    groupe: "Pilotage",
     roles: ["ADMINISTRATEUR", "DIRECTION", "RESPONSABLE_AGENCE"],
   },
   {
