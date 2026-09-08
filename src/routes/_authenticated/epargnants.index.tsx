@@ -134,7 +134,9 @@ function PageEpargnants() {
         numero_cni: v.data.numero_cni,
         adresse: v.data.adresse,
         id_agence: v.data.id_agence,
+        ...(v.data.id_zone ? { id_zone: v.data.id_zone } : {}),
         numero_client: numero as string,
+
       });
       if (error) throw error;
     },
@@ -245,6 +247,25 @@ function PageEpargnants() {
                     </SelectContent>
                   </Select>
                 </div>
+                <div className="space-y-1.5">
+                  <Label>Zone de collecte (facultatif)</Label>
+                  <Select
+                    value={form.id_zone}
+                    onValueChange={(v) => setForm({ ...form, id_zone: v })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sélectionner une zone" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {(zones.data ?? []).map((z) => (
+                        <SelectItem key={z.id_zone} value={z.id_zone}>
+                          {z.libelle} ({z.code})
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <DialogFooter>
                   <Button type="submit" disabled={creer.isPending}>
                     {creer.isPending ? "Création…" : "Créer la fiche"}
