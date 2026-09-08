@@ -56,6 +56,8 @@ const schema = z.object({
   numero_cni: z.string().trim().min(3, "La pièce d'identité est obligatoire").max(50),
   adresse: z.string().trim().min(3, "L'adresse est obligatoire").max(255),
   id_agence: z.string().uuid("Sélectionnez une agence"),
+  id_zone: z.string().optional(),
+
 });
 
 function PageEpargnants() {
@@ -71,6 +73,7 @@ function PageEpargnants() {
     numero_cni: "",
     adresse: "",
     id_agence: profil?.id_agence ?? "",
+    id_zone: "",
   });
 
   const agences = useQuery({
@@ -85,6 +88,20 @@ function PageEpargnants() {
       return data ?? [];
     },
   });
+
+  const zones = useQuery({
+    queryKey: ["zones-liste"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("zone")
+        .select("id_zone, code, libelle")
+        .eq("actif", true)
+        .order("libelle");
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
 
   const liste = useQuery({
     queryKey: ["epargnants", terme],
