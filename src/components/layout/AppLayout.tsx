@@ -4,6 +4,7 @@ import { LogOut, Menu, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { entreesAutorisees, GROUPES } from "./navigation";
+import { GardeRole } from "./GardeRole";
 import { LIBELLE_ROLE } from "@/lib/constantes";
 import { cn } from "@/lib/utils";
 
@@ -148,7 +149,9 @@ export function AppLayout({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto max-w-7xl px-4 py-6 pb-24 lg:pb-8">{children}</main>
+        <main className="mx-auto max-w-7xl px-4 py-6 pb-24 lg:pb-8">
+          <GardeRole>{children}</GardeRole>
+        </main>
       </div>
 
       {/* Navigation basse — mobile */}
