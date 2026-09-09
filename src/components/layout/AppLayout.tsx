@@ -4,6 +4,7 @@ import { LogOut, Menu, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { entreesAutorisees, GROUPES } from "./navigation";
+import { GardeRole } from "./GardeRole";
 import { LIBELLE_ROLE } from "@/lib/constantes";
 import { cn } from "@/lib/utils";
 
