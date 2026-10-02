@@ -148,9 +148,9 @@ function PageTableauDeBord() {
   if (!d) return <EtatErreur erreur={new Error("Les indicateurs sont indisponibles.")} />;
 
   const repartitionOperations = [
-    { type: "Collectes", montant: d.collecteMois, fill: "var(--color-collectes)" },
-    { type: "Retraits", montant: d.retraitMois, fill: "var(--color-retraits)" },
-    { type: "Ventes", montant: d.venteMois, fill: "var(--color-ventes)" },
+    { type: "collectes", montant: d.collecteMois, fill: "var(--color-collectes)" },
+    { type: "retraits", montant: d.retraitMois, fill: "var(--color-retraits)" },
+    { type: "ventes", montant: d.venteMois, fill: "var(--color-ventes)" },
   ];
   const totalOperations = repartitionOperations.reduce((total, item) => total + item.montant, 0);
   const remisesGraphique = [
