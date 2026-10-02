@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Build dashboard visualizations with the existing themed Recharts wrappers and aggregate only RLS-filtered data returned to the current user, so charts remain consistent and access-scoped.
