@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Build dashboard visualizations with the existing themed Recharts wrappers and aggregate only RLS-filtered data returned to the current user, so charts remain consistent and access-scoped.
+- Keep dashboard period and aggregation logic in a pure shared module and paginate authorized reads, so date filters are testable and financial totals are not truncated.
