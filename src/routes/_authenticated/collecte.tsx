@@ -199,6 +199,8 @@ function PageCollecte() {
                 {liste.map((l) => (
                   <li key={l.id_livret}>
                     <button
+                      type="button"
+                      aria-label={`Choisir le livret ${l.numero_livret}${l.epargnant ? ` de ${l.epargnant.nom} ${l.epargnant.prenom}` : ""}`}
                       className="hover:bg-muted flex w-full items-center justify-between gap-3 px-1 py-3 text-left"
                       onClick={() => setLivret(l)}
                     >
